@@ -8,7 +8,7 @@ export function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Menu className="h-6 w-6 text-gray-500 mr-4 cursor-pointer" />
-            <h1 className="text-2xl font-bold text-indigo-600">RencontreActive</h1>
+            <h1 className="text-2xl font-bold text-indigo-600">WestApp</h1>
           </div>
           
           <div className="flex-1 max-w-lg mx-8">
