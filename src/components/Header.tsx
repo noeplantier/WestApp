@@ -40,7 +40,7 @@ export function Header() {
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setShowMap(true)}
-              className="p-2 hover:bg-gray-100 rounded-full"
+              className="p-2 hover:bg-gray-200 rounded-full"
             >
               <Compass className="h-6 w-6 text-gray-500" />
 
@@ -49,7 +49,7 @@ export function Header() {
             <div className="relative">
               <button
                 onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-2 hover:bg-gray-100 rounded-full"
+                className="relative p-2 hover:bg-gray-200 rounded-full"
               >
                 <Bell className="h-6 w-6 text-gray-500" />
                 <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full" />
@@ -60,9 +60,9 @@ export function Header() {
             <div className="relative">
               <button
                 onClick={() => setShowProfile(!showProfile)}
-                className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center cursor-pointer hover:bg-gray-300"
+                className="h-8 w-8 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-200"
               >
-                <User className="h-5 w-5 text-gray-500" />
+                <User className="h-6 w-6 text-gray-500" />
               </button>
               {showProfile && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
@@ -91,7 +91,7 @@ export function Header() {
 
       <Dialog isOpen={showMap} onClose={() => setShowMap(false)} title="Activités à proximité">
         <div className="h-[600px] w-full">
-          <LocationMap />
+          <LocationMap center={undefined} activities={undefined} />
         </div>
       </Dialog>
     </header>

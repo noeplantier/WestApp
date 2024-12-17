@@ -12,3 +12,35 @@
   background: transparent;
   border: none;
 }
+
+/* App.css */
+@keyframes blurIn {
+    from {
+      filter: blur(10px);
+      opacity: 0;
+    }
+    to {
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+  
+  .backdrop-blur-lg {
+    backdrop-filter: blur(10px);
+  }
+  
+  .shadow-2xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .transform {
+    transform: scale(1);
+  }
+  
+  .transition {
+    transition: transform 0.5s;
+  }
+  
+  .hover\:scale-105:hover {
+    transform: scale(1.05);
+  }
