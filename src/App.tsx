@@ -6,7 +6,10 @@ import { Chatbot } from './components/chatbot/Chatbot';
 import { PremiumPlans } from './components/premium/PremiumPlans';
 import type { Activity } from './types';
 
+
+
 const SAMPLE_ACTIVITIES: Activity[] = [
+  
   {
     id: '1',
     title: 'Randonnée sur la Baie de St. Brieuc',
@@ -33,18 +36,31 @@ const SAMPLE_ACTIVITIES: Activity[] = [
   },
   {
     id: '2',
+    title: 'Dégustation de Vins à Bordeaux',
+    description: 'Découverte des grands crus bordelais',
+    date: '20 Mars 2024',
+    time: '18:00',
     title: 'Exploration de la Côte de Granit Rose',
     description: 'Découvrez la magnifique Côte de Granit Rose à Ploumanac’h.',
     date: '18 Mars 2024',
     time: '10:00',
     location: {
+      city: 'Bordeaux, Nouvelle-Aquitaine',
+      address: '10 Rue des Vignerons',
+      coordinates: { lat: 44.837, lng: -0.579 },
       city: 'Ploumanac’h, Bretagne',
       address: 'Sentier des Douaniers',
       coordinates: { lat: 48.824, lng: -3.482 }
     },
+    category: 'Gastronomie',
     category: 'Nature',
     organizer: {
       id: '2',
+      name: 'Pierre Martin',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
+      bio: 'Sommelier professionnel',
+      location: 'Bordeaux',
+      interests: ['Vin', 'Gastronomie', 'Culture'],
       name: 'Jean Le Corre',
       avatar: 'https://images.unsplash.com/photo-1521119989659-a83eee488004',
       bio: 'Explorateur local',
@@ -52,16 +68,26 @@ const SAMPLE_ACTIVITIES: Activity[] = [
       interests: ['Nature', 'Randonnée', 'Aventure']
     },
     participants: [],
+    maxParticipants: 10,
+    imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3',
     maxParticipants: 20,
     imageUrl: 'https://www.sejours-pep22.com/article/produit/photo/photo191.jpg'
   },
   {
+    id: '2',
+    title: 'Dégustation de Vins à Bordeaux',
+    description: 'Découverte des grands crus bordelais',
+    date: '20 Mars 2024',
+    time: '18:00',
     id: '3',
     title: 'Visite du Phare de Brest',
     description: 'Partez à la découverte du Phare de Brest et son histoire.',
     date: '22 Mars 2024',
     time: '14:00',
     location: {
+      city: 'Lannion, Bretagne',
+      address: 'Rue des Mouettes',
+      coordinates: { lat: 44.837, lng: -0.579 },
       city: 'Brest, Bretagne',
       address: 'Port de Brest',
       coordinates: { lat: 48.390, lng: -4.486 }
@@ -92,6 +118,12 @@ const SAMPLE_ACTIVITIES: Activity[] = [
     },
     category: 'Gastronomie',
     organizer: {
+      id: '2',
+      name: 'Pierre Martin',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
+      bio: 'Sommelier professionnel',
+      location: 'Bordeaux',
+      interests: ['Vin', 'Gastronomie', 'Culture'],
       id: '4',
       name: 'Anne Le Gall',
       avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2',
@@ -100,6 +132,8 @@ const SAMPLE_ACTIVITIES: Activity[] = [
       interests: ['Cuisine', 'Tradition', 'Partage']
     },
     participants: [],
+    maxParticipants: 10,
+    imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3',
     maxParticipants: 8,
     imageUrl: 'https://www.quimper-tourisme.bzh/wp-content/uploads/l-atelier-du-phare-st-pierre-penmarch-10-11187.jpg'
   },
@@ -160,18 +194,18 @@ function App() {
       <Header />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <CategoryFilter />
-        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {SAMPLE_ACTIVITIES.map((activity) => (
             <ActivityCard key={activity.id} activity={activity} />
           ))}
         </div>
-
-        <PremiumPlans />
+    
+      <PremiumPlans />
       </main>
       
       <Chatbot />
     </div>
+    
   );
 }
 
