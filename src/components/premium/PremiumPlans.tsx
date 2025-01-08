@@ -2,11 +2,39 @@ import React from 'react';
 import { Check } from 'lucide-react';
 import type { PremiumPlan } from '../../types/premium';
 
+
+interface PremiumPlan {
+
+  id: string;
+
+  name: string;
+
+  price: number;
+
+  duration: 'weekly' | 'monthly' | 'yearly';
+
+  features: string[];
+
+  highlighted?: boolean;
+
+}
+
 const PREMIUM_PLANS: PremiumPlan[] = [
+  {
+    id: 'weekly',
+    name: 'Premium Semaine',
+    price: 9.99,
+    duration:'weekly',
+    features: [
+      'Accès standard aux chat rooms',
+      'Création d\'événements standard',
+      'Notifications standard'
+    ]
+  },
   {
     id: 'monthly',
     name: 'Premium Mensuel',
-    price: 9.99,
+    price: 19.99,
     duration: 'monthly',
     features: [
       'Accès illimité aux chat rooms',
@@ -32,7 +60,9 @@ const PREMIUM_PLANS: PremiumPlan[] = [
 ];
 
 export function PremiumPlans() {
+  
   return (
+    
     <div className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">

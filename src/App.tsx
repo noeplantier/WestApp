@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Header } from './components/Header';
 import { CategoryFilter } from './components/CategoryFilter';
@@ -6,20 +5,10 @@ import { ActivityCard } from './components/ActivityCard';
 import { Chatbot } from './components/chatbot/Chatbot';
 import { PremiumPlans } from './components/premium/PremiumPlans';
 import type { Activity } from './types';
-import { Modal, Button, Form } from 'react-bootstrap';
 import './index.css';
+import MainTitle from './components/title/MainTitle';
 
 const App = () => {
-
-const [showLoginModal, setShowLoginModal] = useState(false);
-
-const handleOpenLoginModal = () => {
-  setShowLoginModal(true);
-};
-
-const handleCloseLoginModal = () => {
-  setShowLoginModal(false);
-};
 
 const SAMPLE_ACTIVITIES: Activity[] = [
   
@@ -173,54 +162,16 @@ const SAMPLE_ACTIVITIES: Activity[] = [
 return (
   <div>
     <Header />
-    <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center my-2 p-6 bg-white bg-opacity-80 ">
-          <h1 className="text-purple-700 text-9xl font-bold">WestApp</h1>
-          <h2 className="text-gray-600 text-4xl mt-4">Passez de l'URL à l'IRL</h2>
-          <div className="mt-8">
-            <a href="/explanations" className="btn btn-primary mr-4">Get Started</a>
-            <Button variant="secondary" onClick={handleOpenLoginModal}>Se Connecter</Button>
-          </div>
-        </div>
-      </div>
-
-    <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
-      <Modal.Header closeButton>
-        <Modal.Title>Connexion</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseLoginModal}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
-
+    <MainTitle />
     <div className="min-h-screen bg-gray-50">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <CategoryFilter />
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {SAMPLE_ACTIVITIES.map((activity) => (
             <ActivityCard key={activity.id} activity={activity} />
           ))}
         </div>
-    
       <PremiumPlans />
       </main>
       

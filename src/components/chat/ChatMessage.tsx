@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatDistanceToNow } from '../utils/dateUtils';
+import { formatDistanceToNow } from '../../utils/dateUtils';
 import type { Message } from '../../types/chat';
 import { Crown } from 'lucide-react';
 
