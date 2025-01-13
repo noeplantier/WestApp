@@ -50,7 +50,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
           <div className="mt-4">
             <button
               onClick={() => setShowParticipateModal(true)}
-              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors"
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
             >
               Participer
             </button>
@@ -157,7 +157,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
                 // Handle participation logic here
                 setShowParticipateModal(false);
               }}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-indigo-700"
             >
               Confirmer ma participation
             </button>

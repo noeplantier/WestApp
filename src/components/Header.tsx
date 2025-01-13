@@ -21,7 +21,7 @@ export function Header() {
               className="h-6 w-6 text-gray-500 mr-4 cursor-pointer"
               onClick={() => setShowMenu(!showMenu)}
             />
-            <h1 className="text-2xl font-bold text-indigo-600">WestApp</h1>
+            <h1 className="text-3xl font-bold text-blue-600">WestApp</h1>
           </div>
 
           <div className="flex-1 max-w-lg mx-6"> {/* Marges réduites */}
@@ -31,7 +31,7 @@ export function Header() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Rechercher des activités..."
-                className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
               <Search className="absolute right-3 top-3 transform -translate-y-1/2 h-5 w-5 text-gray-400" /> {/* Loupe à droite */}
             </div>
@@ -51,7 +51,7 @@ export function Header() {
                 className="relative p-1 hover:bg-gray-200 rounded-full"
               >
                 <Bell className="h-5 w-5 text-gray-500" /> {/* Taille adaptée */}
-                <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full" />
+                <span className="absolute top-0 right-0 h-2 w-2 bg-blue-600 rounded-full" />
               </button>
               {showNotifications && <NotificationsPanel />}
             </div>
