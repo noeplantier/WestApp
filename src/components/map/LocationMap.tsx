@@ -1,68 +1,97 @@
 import React, { useState } from 'react';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-const LocationMap = ({ center, activities }: { center: any, activities: any[] }) => {
-  const [showModal, setShowModal] = useState(false);
+const LocationMap = ({ center }: { center: any }) => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
-  const handleOpenModal = () => {
-    setShowModal(true);
+  // Données fictives des événements
+  const events = [
+    {
+      id: 1,
+      name: 'Concert en plein air',
+      location: { lat: 48.8566, lng: 2.3522 }, // Paris
+      date: new Date('2025-01-20'),
+    },
+    {
+      id: 2,
+      name: 'Fête de la gastronomie',
+      location: { lat: 45.764, lng: 4.8357 }, // Lyon
+      date: new Date('2025-01-25'),
+    },
+    {
+      id: 3,
+      name: 'Festival d\'art',
+      location: { lat: 43.6108, lng: 3.8767 }, // Montpellier
+      date: new Date('2025-02-01'),
+    },
+  ];
+
+  const handleDateChange = (date: Date) => {
+    setSelectedDate(date);
+    setSelectedEvent(null); // Réinitialise l'événement sélectionné
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  const filteredEvents = events.filter(
+    (event) => event.date.toDateString() === selectedDate.toDateString()
+  );
 
   return (
     <div>
-      <button
-        className="bg-blue-500 text-white p-2 rounded-full"
-        onClick={handleOpenModal}
-      >
-        <i className="fas fa-compass"></i> {/* Assurez-vous d'avoir FontAwesome pour l'icône */}
-      </button>
+      {/* Date Picker */}
+      <div className="p-4 flex justify-center">
+        <DatePicker
+          selected={selectedDate}
+          onChange={handleDateChange}
+          className="p-2 border rounded"
+          dateFormat="dd/MM/yyyy"
+        />
+      </div>
 
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 bg-black opacity-50" onClick={handleCloseModal}></div>
-          <div className="bg-white rounded-lg overflow-hidden shadow-lg w-11/12 md:w-3/4 lg:w-1/2">
-            <div className="flex justify-between items-center p-4 border-b">
-              <h2 className="text-xl font-semibold">Carte de Géolocalisation</h2>
-              <button className="text-gray-500 hover:text-gray-700" onClick={handleCloseModal}>
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
-            </div>
-            <div className="p-4">
-           
-                <MapContainer
-                  center={center}
-                  zoom={6}
-                  style={{ height: '400px', width: '100%' }}
-             
-              >
-                <TileLayer
-                  url={`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=YOUR_MAPBOX_ACCESS_TOKEN`}
-                  id="mapbox/streets-v11"
-                  tileSize={512}
-                  zoomOffset={-1}
-                  attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> contributors'
-                />
-                {activities.map((activity) => (
-                  <Marker
-                    key={activity.id}
-                    position={[activity.location.coordinates.lat, activity.location.coordinates.lng]}
-                  />
-                ))}
-              </MapContainer>
-            </div>
-            <div className="flex justify-end p-4 border-t">
-              <button className="bg-gray-500 text-white px-4 py-2 rounded" onClick={handleCloseModal}>
-                Fermer
-              </button>
-            </div>
-          </div>
+      {/* Carte interactive */}
+      <MapContainer
+        center={center}
+        zoom={6}
+        style={{ height: '500px', width: '100%', margin: '20px 0' }}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        {filteredEvents.map((event) => (
+          <Marker
+            key={event.id}
+            position={[event.location.lat, event.location.lng]}
+            eventHandlers={{
+              click: () => {
+                setSelectedEvent(event);
+              },
+            }}
+          >
+            <Popup>
+              <h3>{event.name}</h3>
+              <p>Date : {event.date.toLocaleDateString()}</p>
+              <p>Localisation : [{event.location.lat}, {event.location.lng}]</p>
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+
+      {/* Informations sur l'événement sélectionné */}
+      {selectedEvent && (
+        <div className="fixed bottom-10 right-10 bg-white p-4 shadow-md rounded-lg">
+          <h2 className="text-lg font-bold">{selectedEvent.name}</h2>
+          <p>Date : {selectedEvent.date.toLocaleDateString()}</p>
+          <p>Localisation : [{selectedEvent.location.lat}, {selectedEvent.location.lng}]</p>
+          <button
+            className="bg-red-500 text-white px-4 py-2 rounded mt-2"
+            onClick={() => setSelectedEvent(null)}
+          >
+            Fermer
+          </button>
         </div>
       )}
     </div>

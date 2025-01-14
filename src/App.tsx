@@ -174,7 +174,6 @@ return (
         </div>
       <PremiumPlans />
       </main>
-      
       <Chatbot />
     </div>
     </div>

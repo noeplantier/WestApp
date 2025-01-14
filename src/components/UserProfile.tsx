@@ -180,7 +180,7 @@ const UserProfilePage: React.FC = () => {
           
           {/* Profile Avatar */}
           <Avatar
-            src="/public/images/persona.jpeg"
+            src="/images/persona.jpeg"
             sx={{
               width: 150,
               height: 150,
