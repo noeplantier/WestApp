@@ -4,17 +4,20 @@ import { NotificationsPanel } from './notifications/NotificationsPanel';
 import { useSearch } from '../hooks/useSearch';
 import { Dialog } from './shared/Dialog';
 import LocationMap from './map/LocationMap';
+import ActivityCards from '../components/ActivityCards';
+import UserProfile from '../components/UserProfile';
 
 export function Header() {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [selectedProfile, setSelectedProfile] = useState<string | null>(null); // Stocke l'utilisateur recherché
   const { searchQuery, setSearchQuery, filteredActivities } = useSearch();
 
   return (
     <header className="bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6"> {/* Marges réduites */}
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Menu
@@ -24,8 +27,8 @@ export function Header() {
             <h1 className="text-3xl font-bold text-blue-600">WestApp</h1>
           </div>
 
-          <div className="flex-1 max-w-lg mx-6"> {/* Marges réduites */}
-            <div className="relative flex items-center">
+          <div className="flex-1 max-w-lg mx-6">
+            <div className="searchbar relative flex items-center">
               <input
                 type="text"
                 value={searchQuery}
@@ -33,16 +36,35 @@ export function Header() {
                 placeholder="Rechercher des activités..."
                 className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
-              <Search className="absolute right-3 top-3 transform -translate-y-1/2 h-5 w-5 text-gray-400" /> {/* Loupe à droite */}
+              <Search className="absolute right-3 top-2.4 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+
+              {/* Résultats de recherche */}
+              {searchQuery && (
+                <div className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                  {filteredActivities.length > 0 ? (
+                    filteredActivities.map((activity) => (
+                      <div
+                        key={activity.id}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => console.log(`Selected activity: ${activity.name}`)}
+                      >
+                        {activity.name}
+                      </div>
+                    ))
+                  ) : (
+                    <p className="px-4 py-2 text-gray-500">Aucune activité trouvée.</p>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
-          <div className="flex items-center space-x-3"> {/* Espacement réduit */}
+          <div className="flex items-center space-x-3">
             <button
               onClick={() => setShowMap(true)}
               className="p-1 hover:bg-gray-200 rounded-full"
             >
-              <Compass className="h-5 w-5 text-gray-500" /> {/* Taille adaptée */}
+              <Compass className="h-5 w-5 text-gray-500" />
             </button>
 
             <div className="relative">
@@ -50,7 +72,7 @@ export function Header() {
                 onClick={() => setShowNotifications(!showNotifications)}
                 className="relative p-1 hover:bg-gray-200 rounded-full"
               >
-                <Bell className="h-5 w-5 text-gray-500" /> {/* Taille adaptée */}
+                <Bell className="h-5 w-5 text-gray-500" />
                 <span className="absolute top-0 right-0 h-2 w-2 bg-blue-600 rounded-full" />
               </button>
               {showNotifications && <NotificationsPanel />}
@@ -61,12 +83,18 @@ export function Header() {
                 onClick={() => setShowProfile(!showProfile)}
                 className="h-8 w-8 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-200"
               >
-                <User className="h-5 w-5 text-gray-500" /> {/* Taille adaptée */}
+                <User className="h-5 w-5 text-gray-500" />
               </button>
+
               {showProfile && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                <div className="main-infos absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                   <ul>
-                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Profil</li>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => setSelectedProfile('user123')} // Remplacez par une logique dynamique
+                    >
+                      Profil
+                    </li>
                     <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Paramètres</li>
                     <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Déconnexion</li>
                   </ul>
@@ -77,14 +105,14 @@ export function Header() {
         </div>
 
         {showMenu && (
-         <div className="bg-white border-t border-gray-200 shadow-lg p-4">
-         <ul>
-           <li className="py-2 px-4 cursor-pointer">Accueil</li>
-           <li className="py-2 px-4 cursor-pointer">Activités</li>
-           <li className="py-2 px-4 cursor-pointer">Catégories</li>
-           <li className="py-2 px-4 cursor-pointer">Aide</li>
-         </ul>
-       </div>
+          <div className="bg-white border-t border-gray-200 shadow-lg p-4">
+            <ul>
+              <li className="py-2 px-4 cursor-pointer">Accueil</li>
+              <li className="py-2 px-4 cursor-pointer">Activités</li>
+              <li className="py-2 px-4 cursor-pointer">Catégories</li>
+              <li className="py-2 px-4 cursor-pointer">Aide</li>
+            </ul>
+          </div>
         )}
       </div>
 
@@ -93,6 +121,17 @@ export function Header() {
           <LocationMap center={undefined} activities={undefined} />
         </div>
       </Dialog>
+
+      {/* Affichage dynamique du profil utilisateur */}
+      {selectedProfile && (
+        <Dialog
+          isOpen={!!selectedProfile}
+          onClose={() => setSelectedProfile(null)}
+          title="Profil Utilisateur"
+        >
+          <UserProfile userId={selectedProfile} />
+        </Dialog>
+      )}
     </header>
   );
 }
