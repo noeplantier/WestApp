@@ -4,7 +4,6 @@ import { NotificationsPanel } from './notifications/NotificationsPanel';
 import { useSearch } from '../hooks/useSearch';
 import { Dialog } from './shared/Dialog';
 import LocationMap from './map/LocationMap';
-import ActivityCards from '../components/ActivityCards';
 import UserProfile from '../components/UserProfile';
 
 export function Header() {
@@ -105,7 +104,7 @@ export function Header() {
         </div>
 
         {showMenu && (
-          <div className="bg-white border-t border-gray-200 shadow-lg p-4">
+          <div className=" border-white-200 shadow-lg p-1">
             <ul>
               <li className="py-2 px-4 cursor-pointer">Accueil</li>
               <li className="py-2 px-4 cursor-pointer">Activités</li>

@@ -12,6 +12,17 @@
   }
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Espace entre les boutons */
+}
+
+.custom-button {
+  flex: 1; /* Les boutons prennent la même largeur */
+  max-width: 150px; /* Limite la largeur maximale des boutons */
+}
+
 .leaflet-container {
   height: 100%;
   width: 100%;

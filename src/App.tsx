@@ -7,6 +7,7 @@ import { PremiumPlans } from './components/premium/PremiumPlans';
 import type { Activity } from './types';
 import './index.css';
 import MainTitle from './components/title/MainTitle';
+import HomePage from './components/home/HomePage';
 
 const App = () => {
 
@@ -166,6 +167,7 @@ return (
     <div className="min-h-screen bg-gray-50">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <CategoryFilter />
+        <HomePage/>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {SAMPLE_ACTIVITIES.map((activity) => (
