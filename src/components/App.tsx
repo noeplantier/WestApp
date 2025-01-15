@@ -4,8 +4,9 @@ import Login from './Login';
 import Profile from './Profile';
 import MainTitle from './title/MainTitle';
 import HomePage from './home/HomePage';
+import SignupModal from './SignupModal';
 
-const App: React.FC = () => {
+function App () {
   const [user, setUser] = useState(null);
 
   const handleLogin = (userData: any) => {
@@ -15,13 +16,15 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MainTitle />} />
-        <Route path="/home" element={<HomePage />} />
+      <Route path="/" element={<MainTitle />} />
+      <Route path="/home" element={<HomePage />} />
         <Route
           path="/profile"
-          element={user ? <Profile user={user} /> : <Login onLogin={handleLogin} />}
+          element={user ? <Profile user={user} /> : <Login onLogin={handleSignup} />}
         />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/signup" element={<SignupModal onSignup={handleSignup} />} />
+
       </Routes>
     </Router>
   );
