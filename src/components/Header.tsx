@@ -116,17 +116,18 @@ export function Header() {
           </div>
         </div>
 
-        {showMenu && (
-          <div className=" border-white-200 shadow-lg p-1">
-            <ul>
-              <li className="py-2 px-4 cursor-pointer">Accueil</li>
-              <li className="py-2 px-4 cursor-pointer">Activités</li>
-              <li className="py-2 px-4 cursor-pointer">Catégories</li>
-              <li className="py-2 px-4 cursor-pointer">Aide</li>
-            </ul>
-          </div>
-        )}
-      </div>
+
+      {showMenu && (
+        <div className="absolute left-30 top-14 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+          <ul>
+            <li className="py-2 px-4 cursor-pointer">Accueil</li>
+            <li className="py-2 px-4 cursor-pointer">Activités</li>
+            <li className="py-2 px-4 cursor-pointer">Catégories</li>
+            <li className="py-2 px-4 cursor-pointer">Aide</li>
+          </ul>
+        </div>
+      )}
+    </div>
 
       <Dialog isOpen={showMap} onClose={() => setShowMap(false)} title="Activités à proximité">
         <div className="h-[600px] w-full">
