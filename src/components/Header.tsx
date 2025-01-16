@@ -6,6 +6,10 @@ import { Dialog } from './shared/Dialog';
 import LocationMap from './map/LocationMap';
 import UserProfile from '../components/UserProfile';
 import SettingsModal from './settings/SettingsModal';
+import HelpModal from '../components/help/HelpModal';
+import CategoriesModal from '../components/categories/CategoriesModal';
+
+
 
 export function Header() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -15,6 +19,20 @@ export function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [selectedProfile, setSelectedProfile] = useState<string | null>(null); // Stocke l'utilisateur recherché
   const { searchQuery, setSearchQuery, filteredActivities } = useSearch();
+  const [showHelpModal, setShowHelpModal] = useState(false);
+  const [showCategoriesModal, setShowCategoriesModal] = useState(false);
+
+
+  const handleHelpClick = () => {
+    setShowMenu(false); // Ferme le menu
+    setShowHelpModal(true); // Ouvre la modale
+  
+  };
+
+  const handleCategoriesClick = () => {
+    setShowMenu(false);
+    setShowCategoriesModal(true);
+  };
 
   return (
     <header className="bg-white shadow-sm">
@@ -121,13 +139,36 @@ export function Header() {
         <div className="absolute left-30 top-14 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
           <ul>
             <li className="py-2 px-4 cursor-pointer">Accueil</li>
-            <li className="py-2 px-4 cursor-pointer">Activités</li>
-            <li className="py-2 px-4 cursor-pointer">Catégories</li>
-            <li className="py-2 px-4 cursor-pointer">Aide</li>
+            <li 
+              className="py-2 px-4 cursor-pointer hover:bg-gray-100"
+              onClick={handleCategoriesClick}
+            >
+              Catégories
+            </li>
+          <li 
+              className="py-2 px-4 cursor-pointer hover:bg-gray-100"
+              onClick={handleHelpClick}
+            >
+              Aide
+            </li>
           </ul>
         </div>
       )}
+
+      {/* Modal d'aide */}
+      <HelpModal 
+        isOpen={showHelpModal}
+        onClose={() => setShowHelpModal(false)}
+      />
     </div>
+
+    <CategoriesModal 
+        isOpen={showCategoriesModal}
+        onClose={() => setShowCategoriesModal(false)}
+        userLocation="Paris"
+        userInterests={['Sports', 'Culture', 'Technologie']}
+      />
+      
 
       <Dialog isOpen={showMap} onClose={() => setShowMap(false)} title="Activités à proximité">
         <div className="h-[600px] w-full">
