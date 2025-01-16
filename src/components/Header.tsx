@@ -5,8 +5,10 @@ import { useSearch } from '../hooks/useSearch';
 import { Dialog } from './shared/Dialog';
 import LocationMap from './map/LocationMap';
 import UserProfile from '../components/UserProfile';
+import SettingsModal from './settings/SettingsModal';
 
 export function Header() {
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -90,11 +92,22 @@ export function Header() {
                   <ul>
                     <li
                       className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => setSelectedProfile('user123')} // Remplacez par une logique dynamique
+                      onClick={() => setSelectedProfile('user123')} 
                     >
                       Profil
                     </li>
-                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Paramètres</li>
+                    <li
+  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+  onClick={() => setIsSettingsOpen(true)}
+>
+  Paramètres
+</li>
+
+<SettingsModal 
+  open={isSettingsOpen}
+  onClose={() => setIsSettingsOpen(false)}
+/>
+    
                     <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Déconnexion</li>
                   </ul>
                 </div>

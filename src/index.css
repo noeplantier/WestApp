@@ -11,6 +11,9 @@
     @apply bg-background text-foreground;
   }
 }
+#home-container{
+padding-top: 15rem;
+}
 
 .homepage-bg {
   position: absolute;

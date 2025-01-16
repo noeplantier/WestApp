@@ -48,8 +48,8 @@ const HomePage: React.FC<HomePageProps> = ({ activities, maxDistance = 50 }) => 
 
       {/* Contenu principal */}
       <div className="flex flex-col min-h-screen relative z-10">
-        <div className="text-center my-2 p-6" id="main-container">
-          <h1 className="text-white text-9xl font-bold" id="main-title">
+        <div className="text-center my-2 p-6" id="home-container">
+          <h1 className="text-white text-9xl font-bold" id="home-title">
             WestApp
           </h1>
           <h2 className="text-white font-semibold text-5xl mt-4">

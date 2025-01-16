@@ -5,6 +5,8 @@ import Profile from './Profile';
 import MainTitle from './title/MainTitle';
 import HomePage from './home/HomePage';
 import SignupModal from './SignupModal';
+import SettingsModal from './settings/SettingsModal';
+
 
 function App () {
   const [user, setUser] = useState(null);
@@ -16,6 +18,8 @@ function App () {
   return (
     <Router>
       <Routes>
+
+<Route path="/settings" element={<SettingsModal />} />
       <Route path="/" element={<MainTitle />} />
       <Route path="/home" element={<HomePage />} />
         <Route
