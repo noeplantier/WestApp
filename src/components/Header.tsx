@@ -32,27 +32,17 @@ export function Header() {
     modalSetter(true); // Ouvre la modale cible
   };
 
-  const handleOutsideClick = (event: MouseEvent) => {
-    const target = event.target as HTMLElement;
-    if (
-      !target.closest('.modale-content') &&
-      !target.closest('.menu') &&
-      !target.closest('.header-button')
-    ) {
-      closeAllMenus();
-      setIsPremiumModalOpen(false);
-      setShowCategoriesModal(false);
-      setShowHelpModal(false);
-      setShowMap(false);
-      setShowProfileModal(false);
-      setIsSettingsOpen(false);
+  const handleClickOutside = (event: MouseEvent) => {
+    const modale = document.querySelector('.modale');
+    if (modale && !modale.contains(event.target as Node)) {
+      closeAllMenus(); // Ferme tous les menus et notifications
     }
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('click', handleClickOutside);
     return () => {
-      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener('click', handleClickOutside);
     };
   }, []);
 
