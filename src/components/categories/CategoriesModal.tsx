@@ -60,7 +60,7 @@ const CategoriesModal = ({ isOpen, onClose, userLocation, userInterests = [] }) 
 
           {/* Search bar */}
           <div className="mt-4 relative">
-            <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <Search className="w-5 h-5 absolute left-3 top-2.5 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               placeholder="Rechercher une catégorie..."

@@ -1,0 +1,66 @@
+/* Conteneur du loader */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e0f7fa; /* Bleu clair pour un thème maritime */
+  }
+  
+  /* Conteneur des vagues */
+  .waves {
+    position: relative;
+    width: 150px;
+    height: 30px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style pour chaque vague */
+  .wave {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #0288d1; /* Bleu océan */
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: wave-animation 1.5s infinite ease-in-out;
+  }
+  
+  /* Décalage des vagues */
+  .wave1 {
+    animation-delay: 0s;
+  }
+  .wave2 {
+    animation-delay: 0.5s;
+    background: #039be5; /* Variation de bleu */
+  }
+  .wave3 {
+    animation-delay: 1s;
+    background: #03a9f4; /* Variation de bleu */
+  }
+  
+  /* Animation des vagues */
+  @keyframes wave-animation {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(0.6);
+      opacity: 0.8;
+    }
+  }
+  
+  /* Texte du loader */
+  .loader-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #01579b; /* Bleu marine */
+    text-align: center;
+  }
+  

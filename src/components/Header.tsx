@@ -8,10 +8,13 @@ import UserProfile from '../components/UserProfile';
 import SettingsModal from './settings/SettingsModal';
 import HelpModal from '../components/help/HelpModal';
 import CategoriesModal from '../components/categories/CategoriesModal';
+import { PremiumModal } from './premium/PremiumModal';
+
 
 
 
 export function Header() {
+  const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showMap, setShowMap] = useState(false);
@@ -138,7 +141,12 @@ export function Header() {
       {showMenu && (
         <div className="absolute left-30 top-14 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
           <ul>
-            <li className="py-2 px-4 cursor-pointer">Accueil</li>
+          <li
+            className="py-2 px-4 cursor-pointer"
+            onClick={() => setIsPremiumModalOpen(true)}
+          >
+            Premium
+          </li>
             <li 
               className="py-2 px-4 cursor-pointer hover:bg-gray-100"
               onClick={handleCategoriesClick}
@@ -155,6 +163,14 @@ export function Header() {
         </div>
       )}
 
+
+
+      {/* Modal Premium */}
+      <PremiumModal
+        isOpen={isPremiumModalOpen}
+        onClose={() => setIsPremiumModalOpen(false)}
+      />
+      
       {/* Modal d'aide */}
       <HelpModal 
         isOpen={showHelpModal}

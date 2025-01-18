@@ -3,13 +3,14 @@ import { Header } from './components/Header';
 import { CategoryFilter } from './components/CategoryFilter';
 import { ActivityCard } from './components/ActivityCard';
 import { Chatbot } from './components/chatbot/Chatbot';
-import { PremiumPlans } from './components/premium/PremiumPlans';
+import { PremiumModal} from './components/premium/PremiumModal';
 import type { Activity } from './types';
 import './index.css';
 import MainTitle from './components/title/MainTitle';
-import HomePage from './components/home/HomePage';
-
+import { useEffect, useState } from 'react';
+import Loader from './components/loader/Loader';
 const App = () => {
+const [isLoading, setIsLoading] = useState(true);
 
 const SAMPLE_ACTIVITIES: Activity[] = [
   
@@ -160,11 +161,22 @@ const SAMPLE_ACTIVITIES: Activity[] = [
   // Ajoutez encore 6 cartes similaires ici...
 ];
 
+
+useEffect(() => {
+  // Simulez un temps de chargement avant que l'application soit prête
+  const timer = setTimeout(() => setIsLoading(false), 3000);
+  return () => clearTimeout(timer);
+}, []);
+
+if (isLoading) {
+  return <Loader />; // Affiche le loader pendant le chargement
+}
+
+
 return (
   <div>
     <Header />
     <MainTitle />
-    <HomePage activities={SAMPLE_ACTIVITIES} />
     <div className="min-h-screen bg-gray-50">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <CategoryFilter />
@@ -175,7 +187,9 @@ return (
             <ActivityCard key={activity.id} activity={activity} />
           ))}
         </div>
-      <PremiumPlans />
+      <PremiumModal isOpen={false} onClose={function (): void {
+          throw new Error('Function not implemented.');
+        } } />
       </main>
       <Chatbot />
     </div>
