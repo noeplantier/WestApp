@@ -1,4 +1,3 @@
-import './Loader.css'; // Fichier CSS pour les styles du loader
 
 const Loader = () => {
   return (

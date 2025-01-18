@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { PremiumModal } from './premium/PremiumModal';
-import Login from './Login';
+import Login from '../components/login/LoginModal';
 import Profile from './Profile';
 import MainTitle from './title/MainTitle';
 import HomePage from './home/HomePage';
-import SignupModal from './SignupModal';
+import SignupModal from '../components/signup/SignupModal';
 import SettingsModal from './settings/SettingsModal';
 import CategoriesModal from './categories/CategoriesModal';
 import HelpModal from './help/HelpModal';
