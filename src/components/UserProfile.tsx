@@ -43,6 +43,7 @@ import {
 } from '@mui/icons-material';
 
 import { createTheme } from '@mui/material';
+import InteractiveChat from './chat/InteractiveChat';
 
 export const theme = createTheme({
   components: {
@@ -186,7 +187,7 @@ const UserProfilePage: React.FC = () => {
               height: 150,
               border: '5px solid white',
               position: 'absolute',
-              bottom: -50,
+              bottom: -60,
               left: 32,
             }}
           />
@@ -198,30 +199,23 @@ const UserProfilePage: React.FC = () => {
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography variant="h4" gutterBottom>
                   {dummyProfile.name}
-                  <Chip
-                    label={`Match ${dummyProfile.matchRate}%`}
-                    color="success"
-                    size="small"
-                    sx={{ ml: 2 }}
-                  />
+              
                 </Typography>
                 <Stack direction="row" spacing={1}>
-                  <Button
-                    variant={isFollowing ? "outlined" : "contained"}
-                    startIcon={<PersonAdd />}
-                    onClick={handleFollow}
-                  >
-                    {isFollowing ? 'Suivi' : 'Suivre'}
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    startIcon={<Send />}
-                    onClick={() => setOpenRequestDialog(true)}
-                  >
-                    Contacter
-                  </Button>
-                </Stack>
-              </Box>
+  <Button
+    variant={isFollowing ? "outlined" : "contained"}
+    startIcon={<PersonAdd />}
+    onClick={handleFollow}
+  >
+    {isFollowing ? 'Suivi' : 'Suivre'}
+  </Button>
+  <InteractiveChat 
+    recipientName={dummyProfile.name}
+    recipientAvatar="/images/persona.jpeg"
+  />
+
+</Stack>
+</Box>
 
               <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 2 }}>
                 <Typography variant="body1" color="text.secondary">
@@ -231,8 +225,13 @@ const UserProfilePage: React.FC = () => {
                   <Cake fontSize="small" /> {dummyProfile.age} ans
                 </Typography>
               </Stack>
-
-              <Box sx={{ mb: 3 }}>
+              <Chip
+                    label={`Match ${dummyProfile.matchRate}%`}
+                    color="primary"
+                    size="small"
+                    sx={{ ml: 2 }}
+                  />
+              <Box sx={{ mb: 3, mt:12, }}>
                 <Typography variant="h6" gutterBottom>
                   Description
                 </Typography>
@@ -265,8 +264,10 @@ const UserProfilePage: React.FC = () => {
                 <Typography variant="h6" gutterBottom>
                   Statistiques
                 </Typography>
+             
                 <Stack spacing={1}>
                   <StatsBox>
+                    
                     <Typography variant="body1">Abonnés</Typography>
                     <Typography variant="h6" color="primary">
                       {dummyProfile.followers.toLocaleString()}

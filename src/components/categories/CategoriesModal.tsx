@@ -1,9 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Map, Tag, MapPin, Heart, X, Search, Compass } from 'lucide-react';
 
-const CategoriesModal = ({ isOpen, onClose, userLocation, userInterests = [] }) => {
+const CategoriesModal = ({ isOpen, onClose, userInterests = [] }) => {
   const [activeTab, setActiveTab] = useState('nearby');
   const [searchQuery, setSearchQuery] = useState('');
+  const [location, setLocation] = useState('');
+  const [locationError, setLocationError] = useState('');
+  const [isLoadingLocation, setIsLoadingLocation] = useState(true);
+
+  useEffect(() => {
+    if (isOpen) {
+      getUserLocation();
+    }
+  }, [isOpen]);
+
+  const getUserLocation = () => {
+    setIsLoadingLocation(true);
+    setLocationError('');
+
+    if (!navigator.geolocation) {
+      setLocationError('La géolocalisation n\'est pas supportée par votre navigateur');
+      setIsLoadingLocation(false);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const response = await fetch(
+            `https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=bb184887470e4e0baa0aa70407e0ae62`
+          );
+          const data = await response.json();
+          
+          if (data.results && data.results[0]) {
+            const { city, town, village, suburb } = data.results[0].components;
+            setLocation(city || town || village || suburb || 'votre position');
+          } else {
+            setLocation('votre position');
+          }
+        } catch (error) {
+          setLocation('votre position');
+        }
+        setIsLoadingLocation(false);
+      },
+      (error) => {
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            setLocationError('Accès à la localisation refusé');
+            break;
+          case error.POSITION_UNAVAILABLE:
+            setLocationError('Information de localisation indisponible');
+            break;
+          case error.TIMEOUT:
+            setLocationError('Délai d\'attente de la localisation dépassé');
+            break;
+          default:
+            setLocationError('Une erreur est survenue lors de la géolocalisation');
+        }
+        setIsLoadingLocation(false);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      }
+    );
+  };
 
   if (!isOpen) return null;
 
@@ -14,13 +76,19 @@ const CategoriesModal = ({ isOpen, onClose, userLocation, userInterests = [] }) 
       { id: 3, name: 'Gastronomie', count: 32, icon: '🍽️' },
       { id: 4, name: 'Plein Air', count: 15, icon: '🏕️' },
       { id: 5, name: 'Bien-être', count: 12, icon: '🧘‍♀️' },
-      { id: 6, name: 'Musique', count: 28, icon: '🎵' }
-    ],
-    recommended: [
+      { id: 6, name: 'Musique', count: 28, icon: '🎵' },
       { id: 7, name: 'Photographie', count: 9, icon: '📸' },
       { id: 8, name: 'Tech & Innovation', count: 14, icon: '💻' },
       { id: 9, name: 'Langues', count: 7, icon: '🗣️' },
-      { id: 10, name: 'Jeux de société', count: 16, icon: '🎲' }
+    ],
+    recommended: [
+      { id: 1, name: 'Sports & Fitness', count: 24, icon: '🏃‍♂️' },
+      { id: 2, name: 'Arts & Culture', count: 18, icon: '🎨' },
+      { id: 3, name: 'Gastronomie', count: 32, icon: '🍽️' },
+      { id: 4, name: 'Plein Air', count: 15, icon: '🏕️' },
+      { id: 7, name: 'Photographie', count: 9, icon: '📸' },
+      { id: 8, name: 'Tech & Innovation', count: 14, icon: '💻' },
+      { id: 9, name: 'Langues', count: 7, icon: '🗣️' },
     ]
   };
 
@@ -73,10 +141,25 @@ const CategoriesModal = ({ isOpen, onClose, userLocation, userInterests = [] }) 
           {/* Location info */}
           <div className="mt-4 flex items-center text-sm text-gray-600">
             <MapPin className="w-4 h-4 mr-2" />
-            <span>Catégories près de {userLocation || 'votre position'}</span>
+            {isLoadingLocation ? (
+              <span>Détermination de votre position...</span>
+            ) : locationError ? (
+              <div className="flex items-center">
+                <span className="text-red-500">{locationError}</span>
+                <button
+                  onClick={getUserLocation}
+                  className="ml-2 text-blue-500 hover:text-blue-700"
+                >
+                  Réessayer
+                </button>
+              </div>
+            ) : (
+              <span>Catégories près de {location}</span>
+            )}
           </div>
         </div>
 
+        {/* Rest of the component remains the same */}
         {/* Tabs */}
         <div className="border-b border-gray-200 bg-white">
           <div className="flex">
