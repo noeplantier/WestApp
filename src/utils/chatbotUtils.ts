@@ -1,5 +1,5 @@
-// chatbotUtils.ts
 const HUGGING_FACE_API_URL = 'https://api-inference.huggingface.co/models/NoePlantier/WestApp/facebook/blenderbot-400M-distill';
+const API_KEY = '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'; 
 
 
 interface WestAppResponse {
