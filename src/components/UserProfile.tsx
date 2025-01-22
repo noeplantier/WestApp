@@ -25,6 +25,7 @@ import {
   Alert,
   styled
 } from '@mui/material';
+
 import {
   Mic as MicIcon,
   Stop as StopIcon,
@@ -84,6 +85,7 @@ interface UserProfile {
   lastActive: string;
   socialLinks: SocialLinks;
   matchRate: number;
+  events: number;
   followers: number;
   following: number;
 }
@@ -141,6 +143,7 @@ const UserProfilePage: React.FC = () => {
       facebook: 'sophiemartinphoto'
     },
     matchRate: 85,
+    events: 12,
     followers: 1234,
     following: 891
   };
@@ -166,7 +169,7 @@ const UserProfilePage: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
+    <Container maxWidth="lg">
       {/* Profile Header Card */}
       <Card elevation={3} sx={{ mb: 4, position: 'relative' }}>
         <Box sx={{ position: 'relative' }}>
@@ -193,7 +196,7 @@ const UserProfilePage: React.FC = () => {
           />
         </Box>
 
-        <CardContent sx={{ pt: 8 }}>
+        <CardContent sx={{ pt: 8}}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={8}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -267,7 +270,12 @@ const UserProfilePage: React.FC = () => {
              
                 <Stack spacing={1}>
                   <StatsBox>
-                    
+                  <Typography variant="body1">Évènements</Typography>
+                    <Typography variant="h6" color="primary">
+                      {dummyProfile.events.toLocaleString()}
+                    </Typography>
+                  </StatsBox>
+                    <StatsBox>
                     <Typography variant="body1">Abonnés</Typography>
                     <Typography variant="h6" color="primary">
                       {dummyProfile.followers.toLocaleString()}
@@ -291,25 +299,21 @@ const UserProfilePage: React.FC = () => {
                     <SocialButton color="secondary" size="small">
                       <InstagramIcon />
                     </SocialButton>
-                    {dummyProfile.socialLinks.instagram}
                   </Link>
                   <Link href={`https://linkedin.com/in/${dummyProfile.socialLinks.linkedin}`} target="_blank" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <SocialButton color="primary" size="small">
                       <LinkedInIcon />
                     </SocialButton>
-                    {dummyProfile.socialLinks.linkedin}
                   </Link>
                   <Link href={`https://twitter.com/${dummyProfile.socialLinks.twitter}`} target="_blank" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <SocialButton color="info" size="small">
                       <TwitterIcon />
                     </SocialButton>
-                    {dummyProfile.socialLinks.twitter}
                   </Link>
                   <Link href={`https://facebook.com/${dummyProfile.socialLinks.facebook}`} target="_blank" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <SocialButton color="primary" size="small">
                       <FacebookIcon />
                     </SocialButton>
-                    {dummyProfile.socialLinks.facebook}
                   </Link>
                 </Stack>
               </Paper>

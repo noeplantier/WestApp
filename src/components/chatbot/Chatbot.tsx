@@ -87,7 +87,7 @@ export function Chatbot() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 bg-indigo-600 text-white p-4 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+        className="fixed bottom-4 right-4 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
       >
         <MessageSquare className="h-6 w-6" />
       </button>
@@ -100,7 +100,7 @@ export function Chatbot() {
         onClick={() => setIsMinimized(false)}
         className="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-all duration-300"
       >
-        <MessageSquare className="h-6 w-6 text-indigo-600" />
+        <MessageSquare className="h-6 w-6 text-blue-600" />
       </div>
     );
   }
@@ -108,7 +108,7 @@ export function Chatbot() {
   return (
     <div className="fixed bottom-4 right-4 w-96 bg-white rounded-lg shadow-xl border border-gray-200 transition-all duration-300">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 bg-indigo-600 text-white rounded-t-lg">
+      <div className="flex items-center justify-between p-4 bg-blue-600 text-white rounded-t-lg">
         <div className="flex items-center gap-2">
           <MessageSquare className="h-5 w-5" />
           <h3 className="font-semibold">Assistant WestApp</h3>
@@ -143,16 +143,16 @@ export function Chatbot() {
               >
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
                   {message.isBot ? (
-                    <Bot className="h-5 w-5 text-indigo-600" />
+                    <Bot className="h-5 w-5 text-blue-600" />
                   ) : (
-                    <User className="h-5 w-5 text-indigo-600" />
+                    <User className="h-5 w-5 text-blue-600" />
                   )}
                 </div>
                 <div
                   className={`p-3 rounded-lg ${
                     message.isBot
                       ? 'bg-white border border-gray-200'
-                      : 'bg-indigo-600 text-white'
+                      : 'bg-blue-600 text-white'
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap">{message.content}</p>
@@ -167,7 +167,7 @@ export function Chatbot() {
                   <button
                     key={idx}
                     onClick={() => handleSuggestionClick(suggestion)}
-                    className="text-sm bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full hover:bg-indigo-200 transition-colors"
+                    className="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-200 transition-colors"
                   >
                     {suggestion}
                   </button>
@@ -179,7 +179,7 @@ export function Chatbot() {
         {isTyping && (
           <div className="flex justify-start">
             <div className="flex items-center gap-2 bg-white border border-gray-200 p-3 rounded-lg">
-              <Loader2 className="h-4 w-4 animate-spin text-indigo-600" />
+              <Loader2 className="h-4 w-4 animate-spin text-blue-600" />
               <span className="text-sm text-gray-500">En train d'écrire...</span>
             </div>
           </div>
@@ -196,7 +196,7 @@ export function Chatbot() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Posez votre question..."
-            className="flex-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-50"
+            className="flex-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
             onKeyPress={(e) => e.key === 'Enter' && handleSend()}
           />
           <button
@@ -205,7 +205,7 @@ export function Chatbot() {
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
               isTyping || !input.trim()
                 ? 'bg-gray-300 cursor-not-allowed'
-                : 'bg-indigo-600 hover:bg-indigo-700 text-white'
+                : 'bg-blue-600 hover:bg-blue-700 text-white'
             }`}
           >
             {isTyping ? (
