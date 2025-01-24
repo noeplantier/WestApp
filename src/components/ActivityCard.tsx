@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Calendar, Clock, Users, Mail, Link } from 'lucide-react';
 import { Dialog } from './shared/Dialog';
+import { Star } from 'lucide-react';
 import type { Activity } from '../types';
 
 // Types étendus
@@ -13,6 +14,27 @@ interface ActivityCardProps {
   activity: Activity;
 }
 
+interface Activity {
+  imageUrl: string | undefined;
+  title: string;
+  maxParticipants: ReactNode;
+  organizer: any;
+  participants: any;
+  // Existing properties...
+  description: string;
+  categories: string[];
+  reviews: Review[];
+}
+
+interface Review {
+  id: string;
+  author: string;
+  rating: number;
+  text: string;
+  date: string;
+}
+
+
 export function ActivityCard({ activity }: ActivityCardProps) {
   const [showDetails, setShowDetails] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
@@ -24,6 +46,9 @@ export function ActivityCard({ activity }: ActivityCardProps) {
     '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', 
     '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'
   ];
+
+
+
 
   const handleParticipationRequest = () => {
     const mailtoLink = `mailto:${activity.organizer.email}?subject=Participation à l'événement : ${activity.title}&body=Bonjour,
@@ -136,6 +161,30 @@ Cordialement.`;
     </Dialog>
   );
 
+
+  const StarRating = ({ rating }: { rating: number }) => {
+    return (
+      <div className="flex">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <Star
+            key={star}
+            className={`h-5 w-5 ${
+              star <= rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
+            }`}
+          />
+        ))}
+      </div>
+    );
+  };
+
+
+// Helper method to calculate average rating
+const calculateAverageRating = (reviews: Review[]): number => {
+  return reviews.length > 0 
+    ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length 
+    : 0;
+};
+
   return (
     <>
       <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
@@ -179,12 +228,7 @@ Cordialement.`;
             >
               Voir les détails
             </button>
-            <button
-              onClick={() => setShowCalendar(true)}
-              className="w-full border border-blue-600 text-blue-600 py-2 px-4 rounded-md hover:bg-blue-50 transition-colors"
-            >
-              Sélectionner mes disponibilités
-            </button>
+       
           </div>
         </div>
       </div>
@@ -201,9 +245,14 @@ Cordialement.`;
             className="w-full h-64 object-cover rounded-lg"
           />
           
-          <div className="prose max-w-none">
-            <p>{activity.description}</p>
-          </div>
+       
+<div className="bg-gray-50 p-4 rounded-lg">
+  <h4 className="font-semibold mb-2 text-gray-800">Description</h4>
+  <p className="text-gray-600">{activity.description}</p>
+</div>
+
+
+
           
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -226,6 +275,7 @@ Cordialement.`;
             
             <div>
               <h4 className="font-semibold mb-2">Organisateur</h4>
+              
               <div className="flex items-center">
                 <a 
                   href={`/profile/${activity.organizer.id}`}
@@ -244,6 +294,9 @@ Cordialement.`;
               </div>
             </div>
           </div>
+
+
+       
           
           <div>
             <h4 className="font-semibold mb-2">Participants ({activity.participants.length}/{activity.maxParticipants})</h4>
@@ -265,6 +318,8 @@ Cordialement.`;
             </div>
           </div>
 
+
+          
           <div className="flex justify-end">
             <button
               onClick={() => {

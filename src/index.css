@@ -11,6 +11,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+
 #home-container{
 padding-top: 15rem;
 }

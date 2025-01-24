@@ -9,6 +9,8 @@ import SettingsModal from './settings/SettingsModal';
 import HelpModal from '../components/help/HelpModal';
 import CategoriesModal from '../components/categories/CategoriesModal';
 import { PremiumModal } from './premium/PremiumModal';
+import  sampleActivities  from '../hooks/useActivities'; // Import your activities
+
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
