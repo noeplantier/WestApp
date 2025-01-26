@@ -3,6 +3,7 @@ import { MapPin, Calendar, Clock, Users, Mail, Link } from 'lucide-react';
 import { Dialog } from './shared/Dialog';
 import { Star } from 'lucide-react';
 import type { Activity } from '../types';
+import { CategoryFilter } from './CategoryFilter';
 
 // Types étendus
 interface Availability {
@@ -184,10 +185,11 @@ const calculateAverageRating = (reviews: Review[]): number => {
     ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length 
     : 0;
 };
-
   return (
-    <>
+    
+    <> 
       <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+       
         <img 
           src={activity.imageUrl} 
           alt={activity.title}

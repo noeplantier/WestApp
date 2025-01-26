@@ -30,6 +30,7 @@ padding-top: 15rem;
 #main-container {
   position: relative;
   z-index: 10;
+  background-color: linear-gradient(rgba(43, 38, 38, 0.5), rgba(136, 114, 114, 0.5));
 }
 
 .button-container {

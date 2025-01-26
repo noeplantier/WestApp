@@ -15,13 +15,9 @@ export function CategoryFilter() {
   return (
 
     <div className="text-center my-2 p-6" id="main-container">
-
-    <h1 className="text-white text-9xl font-bold" id="main-title">
-            Événements
-          </h1>
-          <h2 className="text-white font-semibold text-5xl mt-4">
-            Recontres des profils en fonction de tes gouts.
-          </h2>
+<h2 className="text-gray-500 font-semibold text-8xl mt-4 mb-4" style={{ background: 'linear-gradient(to right, #333, #ccc)', WebkitBackgroundClip: 'text', color: 'transparent' }}>
+  Activités à proximité.
+</h2>
 
 
           <div className="flex flex-wrap gap-2 py-4" style={{ marginLeft: "12rem" }}>
