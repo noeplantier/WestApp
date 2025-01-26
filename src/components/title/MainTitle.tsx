@@ -34,7 +34,7 @@ const MainTitle = () => {
       {/* Contenu principal */}
       <div className="flex justify-center items-center min-h-screen">
         <div className="text-center my-2 p-6" id="main-container">
-          <h1 className="text-white text-9xl font-bold" id="main-title">
+          <h1 className="text-white text-9xl font-bold" id="main-title" >
             WestApp
           </h1>
           <h2 className="text-white font-semibold text-5xl mt-4">

@@ -15,7 +15,7 @@ export function CategoryFilter() {
   return (
 
     <div className="text-center my-2 p-6" id="main-container">
-<h2 className="text-gray-500 font-semibold text-8xl mt-4 mb-4" style={{ background: 'linear-gradient(to right, #333, #ccc)', WebkitBackgroundClip: 'text', color: 'transparent' }}>
+<h2 className="text-white font-semibold text-8xl mt-4 mb-4" >
   Activités à proximité.
 </h2>
 
