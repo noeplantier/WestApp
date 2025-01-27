@@ -11,7 +11,7 @@ const Loader = () => {
 
   return (
     <div className="loader-container">
-      <video ref={videoRef} className="loader-video" autoPlay loop muted>
+      <video ref={videoRef} className="loader-video" autoPlay loop muted >
         <source src="/videos/201528-915698783_small.mp4" type="video/mp4" />
         Votre navigateur ne supporte pas la balise vidéo.
       </video>

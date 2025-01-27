@@ -9,10 +9,14 @@ import SettingsModal from './settings/SettingsModal';
 import HelpModal from '../components/help/HelpModal';
 import CategoriesModal from '../components/categories/CategoriesModal';
 import { PremiumModal } from './premium/PremiumModal';
-import  sampleActivities  from '../hooks/useActivities'; // Import your activities
+import  SAMPLE_ACTIVITIES from '../App';
+import { PlusCircle } from 'lucide-react';
+import { CreateEventModal } from './createvent/CreateEventModal';
+
 
 
 export function Header() {
+  const [showCreateEventModal, setShowCreateEventModal] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
   const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -93,12 +97,12 @@ export function Header() {
           </div>
 
           <div className="flex items-center space-x-3">
-            <button
-              onClick={() => handleOpenModal(setShowMap)}
-              className="header-button p-1 hover:bg-gray-200 rounded-full"
-            >
-              <Compass className="h-5 w-5 text-gray-500" />
-            </button>
+          <button
+  onClick={() => handleOpenModal(setShowCreateEventModal)}
+  className="header-button p-1 hover:bg-gray-200 rounded-full"
+>
+  <PlusCircle className="h-5 w-5 text-gray-500" />
+</button>
 
             <div className="relative">
               <button
@@ -176,12 +180,21 @@ export function Header() {
           onClose={() => setShowProfileModal(false)}
           title="Profil Utilisateur"
         >
-          <UserProfile userId="user123" />
+          <UserProfile userId="maelmoizant" />
         </Dialog>
       )}
       {isSettingsOpen && (
         <SettingsModal open={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
       )}
+      <CreateEventModal 
+  isOpen={showCreateEventModal}
+  onClose={() => setShowCreateEventModal(false)}
+  onEventCreate={(eventData) => {
+    // Ici, vous pouvez ajouter la logique pour sauvegarder l'événement
+    console.log('Nouvel événement créé:', eventData);
+    // Exemple : updateEvents([...events, eventData]);
+  }}
+/>
     </header>
   );
 }
