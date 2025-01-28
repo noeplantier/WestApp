@@ -173,11 +173,11 @@ Cordialement.`;
 
   return (
     <>
-      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ">
         <img
           src={activity.imageUrl}
           alt={activity.title}
-          className="w-full h-48 object-cover cursor-pointer"
+          className="w-full h-65  cursor-pointer"
           onClick={() => setShowDetails(true)}
         />
         <div className="p-4">
@@ -202,14 +202,20 @@ Cordialement.`;
               </span>
             </div>
           </div>
-          <div className="mt-4">
-            <button
-              onClick={() => setShowDetails(true)}
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
-            >
-              Détails
-            </button>
-          </div>
+          <div className="mt-4 flex gap-2">
+  <button
+    onClick={() => setShowDetails(true)}
+    className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+  >
+    Détails
+  </button>
+  <button
+    onClick={() => setShowParticipateModal(true)}
+    className="flex-1 bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition-colors"
+  >
+    Participer
+  </button>
+</div>
         </div>
       </div>
 
@@ -218,7 +224,7 @@ Cordialement.`;
           <img
             src={activity.imageUrl}
             alt={activity.title}
-            className="w-full h-65 object-cover rounded-lg"
+            className="w-full h-45 object-cover rounded-lg"
           />
           <div className="bg-gray-50 p-4 rounded-lg mb-2">
             <h4 className="font-semibold text-gray-800">Description</h4>
@@ -264,7 +270,7 @@ Cordialement.`;
                     href={listing.link}
                     className="border rounded-lg overflow-hidden hover:shadow-md transition-shadow"
                   >
-                    <img src={listing.imageUrl} alt={listing.name} className="w-full h-32 object-cover" />
+                    <img src={listing.imageUrl} alt={listing.name} className="w-full h-45 object-cover" />
                     <div className="p-2">
                       <h6 className="text-sm font-medium">{listing.name}</h6>
                       <p className="text-sm text-gray-500">{listing.price} €/nuit</p>
@@ -324,7 +330,6 @@ Cordialement.`;
               className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors"
             >
               Confirmer ma participation
-              Je veux participer
             </button>
           </div>
         </div>
