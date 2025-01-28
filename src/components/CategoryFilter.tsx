@@ -187,7 +187,7 @@ export function CategoryFilter() {
         )}
       </div>
 
-      <div className="flex flex-wrap gap-2 py-4" style={{ marginLeft: "12rem" }}>
+      <div className="flex flex-wrap gap-2 py-4 justify-center">
         {Object.values(categoryDetails).map((category) => (
           <button
             key={category.name}

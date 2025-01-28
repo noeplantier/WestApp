@@ -130,19 +130,7 @@ export function Header() {
         {isMenuOpen && (
           <div className="menu absolute left-30 top-14 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
             <ul>
-              <li
-                className="py-2 px-4 cursor-pointer"
-                onClick={() => handleOpenModal(setIsPremiumModalOpen)}
-              >
-                Premium
-              </li>
-              <li
-                className="py-2 px-4 cursor-pointer hover:bg-gray-100"
-                onClick={() => handleOpenModal(setShowCategoriesModal)}
-              >
-                Catégories
-              </li>
-              <li
+            <li
                 className="py-2 px-4 cursor-pointer hover:bg-gray-100"
                 onClick={() => handleOpenModal(setShowHelpModal)}
               >
@@ -154,8 +142,20 @@ export function Header() {
               >
                 Paramètres
               </li>
-              <li className="py-2 px-4 cursor-pointer hover:bg-gray-100">Déconnexion</li>
-            </ul>
+              <li
+                className="py-2 px-4 cursor-pointer hover:bg-gray-100"
+                onClick={() => handleOpenModal(setShowCategoriesModal)}
+              >
+                Catégories
+              </li>
+              <li
+                className="py-2 px-4 cursor-pointer"
+                onClick={() => handleOpenModal(setIsPremiumModalOpen)}
+              >
+                Premium
+              </li>
+          
+              </ul>
           </div>
         )}
       </div>
