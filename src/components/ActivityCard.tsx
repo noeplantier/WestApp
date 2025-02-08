@@ -1,8 +1,20 @@
 import React, { ReactNode, useState } from 'react';
-import { MapPin, Calendar, Clock, Users, Mail, Link } from 'lucide-react';
+import { MapPin, Calendar, Clock, Users } from 'lucide-react';
 import { Dialog } from './shared/Dialog';
 import { MapContainer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useEffect } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
+
+
+interface Participant {
+  id: string;
+  name: string;
+  photoUrl: string;
+}
+
 
 interface ActivityCardProps {
   activity: Activity;
@@ -22,6 +34,8 @@ interface Activity {
     address: string;
     latitude: number;
     longitude: number;
+    participants: Participant[];
+    maxParticipants: number;
   };
 }
 
@@ -55,6 +69,114 @@ export function ActivityCard({ activity }: ActivityCardProps) {
     '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', 
     '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'
   ];
+
+const [participants, setParticipants] = useState<Participant[]>(activity.participants);
+const [map, setMap] = useState<L.Map | null>(null);
+
+const handleParticipate = () => {
+  if (participants.length < activity.maxParticipants) {
+    const newParticipant: Participant = {
+      id: `participant-${participants.length + 1}`,
+      name: `Participant ${participants.length + 1}`,
+      photoUrl: `/api/placeholder/40/40` // Utilisez une vraie URL d'API pour les photos de profil
+    };
+    setParticipants([...participants, newParticipant]);
+  }
+};
+
+const cardStyles = `
+ aspect-ratio-[3/4]
+  w-full
+  max-w-sm
+  bg-white
+  rounded-lg
+  shadow-md
+  overflow-hidden
+  hover:shadow-lg
+  transition-shadow
+`;
+
+// Modifiez le style de l'image principale
+const imageStyles = `
+  w-full
+  h-48
+  object-cover
+  cursor-pointer
+`;
+
+// Modifiez la section des participants dans la modale de détails
+const participantsSection = `
+  <div className="bg-gray-50 p-4 rounded-lg mt-2">
+    <h4 className="font-semibold mb-2">
+      Participants ({participants.length}/{activity.maxParticipants})
+    </h4>
+    <div className="flex flex-wrap gap-2">
+      {participants.map((participant) => (
+        <div
+          key={participant.id}
+          className="relative group"
+        >
+          <img
+            src={participant.photoUrl}
+            alt={participant.name}
+            className="w-10 h-10 rounded-full border-2 border-white"
+          />
+          <span className="absolute bottom-0 opacity-0 group-hover:opacity-100 bg-black bg-opacity-75 text-white text-xs p-1 rounded transition-opacity">
+            {participant.name}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+`;
+
+// Modifiez la section de la carte dans la modale de détails
+const mapSection = `
+  <div className="mt-4 h-48 rounded-lg overflow-hidden">
+    <MapContainer
+      center={[activity.location.latitude, activity.location.longitude]}
+      zoom={13}
+      style={{ height: '100%', width: '100%' }}
+      whenCreated={setMap}
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={[activity.location.latitude, activity.location.longitude]} />
+    </MapContainer>
+  </div>
+`;
+
+// Modifiez la section des logements avec le prix fixe
+const accommodationsSection = `
+  <div className="bg-gray-50 p-4 rounded-lg mt-2">
+    <h5 className="font-semibold mb-2 text-gray-800">
+      Logements disponibles à proximité (max 60€/nuit) :
+    </h5>
+    <div className="grid grid-cols-2 gap-4">
+      {airbnbListings
+        .filter(listing => listing.price <= 60)
+        .map(listing => (
+          <a
+            key={listing.id}
+            href={listing.link}
+            className="border rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+          >
+            <img
+              src={listing.imageUrl}
+              alt={listing.name}
+              className="w-full h-32 object-cover"
+            />
+            <div className="p-2">
+              <h6 className="text-sm font-medium">{listing.name}</h6>
+              <p className="text-sm text-gray-500">{listing.price} €/nuit</p>
+            </div>
+          </a>
+        ))}
+    </div>
+  </div>
+`;
 
   const handleParticipationRequest = () => {
     const mailtoLink = `mailto:${activity.organizer.email}?subject=Participation à l'événement : ${activity.title}&body=Bonjour,

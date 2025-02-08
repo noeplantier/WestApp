@@ -177,7 +177,7 @@ return (
   <div>
     <Header />
     <MainTitle />
-    <div className="min-h-screen bg-gray-50" style={{ background: 'linear-gradient(to right, #333, #ccc)'}}>
+    <div className="min-h-screen bg-gray-50" style={{ background: 'linear-gradient(to right,rgb(19, 75, 96),rgb(126, 176, 195) )'}}>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <CategoryFilter />

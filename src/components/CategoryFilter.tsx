@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { MapPin, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { MapPin, Search, X } from 'lucide-react';
+import { useSearch } from '../hooks/useSearch';
+
 
 interface CategoryInfo {
   name: string;
@@ -58,6 +60,7 @@ const categoryDetails: Record<string, CategoryInfo> = {
     icon: "🗣️"
   }
 };
+
 
 const CategoryModal = ({ category, isOpen, onClose }: { 
   category: CategoryInfo; 
@@ -161,12 +164,46 @@ export function CategoryFilter() {
     );
   };
 
+
+  const { searchQuery, setSearchQuery, filteredActivities } = useSearch();
+
   return (
     <div className="text-center my-2 p-6" id="main-container">
-      <h2 className="text-white font-semibold text-8xl mt-4 mb-4">
-        Activités à proximité
+      <h2 className="text-white font-semibold text-8xl mt-4 mb-4" style={{textShadow: "1px 1px 2px gray"}}>
+        Activités WestApp
       </h2>
       
+      <div className="flex-1 max-w-lg mx-6">
+            <div className="searchbar relative flex items-center">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Rechercher des activités..."
+                className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+              />
+              <Search className="absolute right-3 top-2.4 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+
+              {searchQuery && (
+                <div className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                  {filteredActivities.length > 0 ? (
+                    filteredActivities.map((activity) => (
+                      <div
+                        key={activity.id}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => console.log(`Selected activity: ${activity.name}`)}
+                      >
+                        {activity.name}
+                      </div>
+                    ))
+                  ) : (
+                    <p className="px-4 py-2 text-gray-500">Aucune activité trouvée.</p>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+          
       {/* Location display */}
       <div className="flex items-center justify-center text-white mb-6">
         <MapPin className="w-5 h-5 mr-2" />
