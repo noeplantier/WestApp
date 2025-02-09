@@ -25,6 +25,7 @@ export function Header() {
   const [showHelpModal, setShowHelpModal] = useState(false);
 
 
+
   const closeAllMenus = () => {
     setIsMenuOpen(false); // Ferme le menu
     setShowNotifications(false);
@@ -65,7 +66,7 @@ export function Header() {
 
           <div className="flex items-center space-x-3">
           <button
-  onClick={() => handleOpenModal(setShowCreateEventModal)}
+  onClick={() => handleOpenModal(setShowMap)}
   className="header-button p-1 hover:bg-gray-200 rounded-full"
 >
   <Map className="h-5 w-5 text-gray-500" />
