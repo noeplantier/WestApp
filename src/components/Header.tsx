@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, Bell, User } from 'lucide-react';
+import { Menu, Bell, User, Map } from 'lucide-react';
 import { NotificationsPanel } from './notifications/NotificationsPanel';
 import { Dialog } from './shared/Dialog';
 import LocationMap from './map/LocationMap';
@@ -68,7 +68,7 @@ export function Header() {
   onClick={() => handleOpenModal(setShowCreateEventModal)}
   className="header-button p-1 hover:bg-gray-200 rounded-full"
 >
-  <PlusCircle className="h-5 w-5 text-gray-500" />
+  <Map className="h-5 w-5 text-gray-500" />
 </button>
 
             <div className="relative">
