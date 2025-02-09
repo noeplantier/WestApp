@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { MapPin, Search, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useSearch } from '../hooks/useSearch';
+import { SearchBar } from './searchbar/SearchBar';  // Ajustez le chemin d'import selon votre structure
+
 
 
 interface CategoryInfo {
@@ -164,7 +166,11 @@ export function CategoryFilter() {
     );
   };
 
-
+  const handleActivitySelect = (activity: Activity) => {
+    // Gérez la sélection d'une activité ici
+    console.log('Selected activity:', activity);
+  };
+  
   const { searchQuery, setSearchQuery, filteredActivities } = useSearch();
 
   return (
@@ -192,39 +198,11 @@ export function CategoryFilter() {
     </h3>
 
 
-    <div className="flex justify-center mt-10 mb-4"> 
-      <div className="flex-1 max-w-lg mx-6">
-        <div className="searchbar relative flex justify-center items-center">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Rechercher des activités..."
-            className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
-          <Search className="absolute right-3 top-2.4 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-
-          {searchQuery && (
-            <div className="absolute top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-              {filteredActivities.length > 0 ? (
-                    filteredActivities.map((activity) => (
-                      <div
-                        key={activity.id}
-                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                        onClick={() => console.log(`Selected activity: ${activity.name}`)}
-                      >
-                        {activity.name}
-                      </div>
-                    ))
-                  ) : (
-                    <p className="px-4 py-2 text-gray-500">Aucune activité trouvée.</p>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
+<SearchBar 
+  activities={filteredActivities} // Passez vos activités ici
+  onActivitySelect={handleActivitySelect}
+/>
+     
       {selectedCategory && (
         <CategoryModal
           category={categoryDetails[selectedCategory]}
@@ -232,6 +210,7 @@ export function CategoryFilter() {
           onClose={() => setSelectedCategory(null)}
         />
       )}
-    </div>
+  </div>
+
   );
 }

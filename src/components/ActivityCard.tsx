@@ -1,7 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import { MapPin, Calendar, Clock, Users } from 'lucide-react';
 import { Dialog } from './shared/Dialog';
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -119,23 +118,7 @@ const participantsSection =
   </div>
 ;
 
-// Modifiez la section de la carte dans la modale de détails
-const mapSection = 
-  <div className="mt-4 h-48 rounded-lg overflow-hidden">
-    <MapContainer
-      center={[activity.location.latitude, activity.location.longitude]}
-      zoom={13}
-      style={{ height: '100%', width: '100%' }}
-      whenCreated={setMap}
-    >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-      <Marker position={[activity.location.latitude, activity.location.longitude]} />
-    </MapContainer>
-  </div>
-;
+
 
 // Modifiez la section des logements avec le prix fixe
 const accommodationsSection = 
@@ -346,7 +329,7 @@ Cordialement.`;
         </div>
 
         {showMap && (
-          <div className="absolute inset-0 bg-white z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-white z-110 flex items-center justify-center">
             <div className="w-full h-full relative">
               <LocationMap />
               <button
