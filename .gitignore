@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
-
+src/utils/chatbotUtils.ts
 .env
 .env.local
