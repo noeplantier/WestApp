@@ -120,8 +120,8 @@ export function SearchBar({
                                   : 'hover:bg-gray-50'}`}
                       onClick={() => handleActivitySelect(activity)}
                     >
-                      <div className="font-medium">{activity.title}</div>
-                      <div className="text-sm text-gray-500 flex items-center gap-2">
+                      <div className="font-medium text-left">{activity.title}</div>
+                      <div className="text-sm text-gray-500 flex gap-2">
                         <span>{activity.location?.city}</span>
                         {Array.isArray(activity.categories) && 
                          activity.categories.length > 0 && (
