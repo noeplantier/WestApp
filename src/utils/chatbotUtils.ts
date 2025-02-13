@@ -1,8 +1,5 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
-const HUGGING_FACE_API_URL = process.env.HUGGING_FACE_API_URL;
-const API_KEY = process.env.API_KEY;
+const HUGGING_FACE_API_URL = import.meta.env.VITE_HUGGING_FACE_API_URL;
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 interface WestAppResponse {
   response: string;
