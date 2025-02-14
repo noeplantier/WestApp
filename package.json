@@ -10,12 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.22.13",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.0",
     "@mui/material": "^6.3.1",
     "@radix-ui/react-avatar": "^1.1.2",
     "@react-google-maps/api": "^2.20.5",
+    "@reduxjs/toolkit": "^2.5.1",
     "@stripe/react-stripe-js": "^3.1.1",
     "@stripe/stripe-js": "^5.5.0",
     "@testing-library/react": "^16.2.0",
@@ -32,7 +34,8 @@
     "react-datepicker": "^7.6.0",
     "react-dom": "^18.3.1",
     "react-leaflet": "^5.0.0",
-    "react-router-dom": "^7.1.1"
+    "react-router-dom": "^7.1.1",
+    "redux": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
