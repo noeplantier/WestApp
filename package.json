@@ -11,11 +11,15 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.22.13",
+    "@clerk/nextjs": "^6.11.3",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.0",
     "@mui/material": "^6.3.1",
+    "@radix-ui/react-accordion": "^1.2.3",
+    "@radix-ui/react-alert-dialog": "^1.0.4",
     "@radix-ui/react-avatar": "^1.1.2",
+    "@radix-ui/react-slot": "^1.0.2",
     "@react-google-maps/api": "^2.20.5",
     "@reduxjs/toolkit": "^2.5.1",
     "@stripe/react-stripe-js": "^3.1.1",
@@ -23,6 +27,8 @@
     "@testing-library/react": "^16.2.0",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
     "framer-motion": "^11.16.1",
     "jquery": "^3.7.1",
@@ -36,7 +42,10 @@
     "react-dom": "^18.3.1",
     "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.1.1",
-    "redux": "^5.0.1"
+    "redux": "^5.0.1",
+    "shadcn-ui": "^0.9.4",
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",

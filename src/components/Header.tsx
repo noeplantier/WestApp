@@ -8,7 +8,6 @@ import SettingsModal from './settings/SettingsModal';
 import HelpModal from '../components/help/HelpModal';
 import CategoriesModal from '../components/categories/CategoriesModal';
 import { PremiumModal } from './premium/PremiumModal';
-import { PlusCircle } from 'lucide-react';
 import { CreateEventModal } from './createvent/CreateEventModal';
 
 
