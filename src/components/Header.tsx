@@ -56,27 +56,28 @@ export function Header() {
             <h1 className="text-3xl font-bold text-blue-600" style={{ textShadow: "1px 1px 2px gray" }}>WestApp</h1>
           </div>
 
-          <div className="flex items-center space-x-3">
-            <button
-              onClick={() => handleOpenModal(setShowMap)}
-              className="header-button p-1 hover:bg-gray-200 rounded-full"
-            >
-              <Map className="h-5 w-5 text-gray-500" />
-            </button>
+          {/* Augmenter l'espace entre les icônes */}
+  <div className="flex items-center space-x-4">
+  <button
+    onClick={() => handleOpenModal(setShowMap)}
+    className="header-button p-1 hover:bg-gray-200 rounded-full"
+  >
+    <Map className="h-5 w-5 text-gray-500" />
+  </button>
 
-            <div className="relative">
-              <button
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="header-button relative p-1 hover:bg-gray-200 rounded-full"
-              >
-                <Bell className="h-5 w-5 text-gray-500" />
-                <span className="absolute top-0 right-0 h-2 w-2 bg-blue-600 rounded-full" />
-              </button>
-              {showNotifications && <NotificationsPanel />}
-            </div>
+  <div className="relative">
+    <button
+      onClick={() => setShowNotifications(!showNotifications)}
+      className="header-button relative p-1 hover:bg-gray-200 rounded-full"
+    >
+      <Bell className="h-5 w-5 text-gray-500" />
+      <span className="absolute top-0 right-0 h-2 w-2 bg-blue-600 rounded-full" />
+    </button>
+    {showNotifications && <NotificationsPanel />}
+  </div>
 
-            <UserButton afterSignOutUrl="/" />
-          </div>
+  <UserButton afterSignOutUrl="/" />
+</div>
         </div>
 
         {isMenuOpen && (
