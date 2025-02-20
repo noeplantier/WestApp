@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, Bell, Map } from 'lucide-react';
+import { Menu, Bell, Map, MessageCircle } from 'lucide-react';
+import Chat from './chat/Chat';
 import { NotificationsPanel } from './notifications/NotificationsPanel';
 import { Dialog } from './shared/Dialog';
 import LocationMap from './map/LocationMap';
@@ -19,6 +20,9 @@ export function Header() {
   const [showMap, setShowMap] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [showCategoriesModal, setShowCategoriesModal] = useState(false);
+  const [showChat, setShowChat] = useState(false);
+
+
 
   const closeAllMenus = () => {
     setIsMenuOpen(false);
@@ -57,7 +61,14 @@ export function Header() {
           </div>
 
           {/* Augmenter l'espace entre les icônes */}
-  <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4">
+  <button
+    onClick={() => handleOpenModal(setShowChat)}
+    className="header-button p-1 hover:bg-gray-200 rounded-full"
+  >
+    <MessageCircle className="h-5 w-5 text-gray-500" />
+  </button>
+
   <button
     onClick={() => handleOpenModal(setShowMap)}
     className="header-button p-1 hover:bg-gray-200 rounded-full"
@@ -111,6 +122,14 @@ export function Header() {
       {isSettingsOpen && (
         <SettingsModal open={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
       )}
+
+<Dialog isOpen={showChat} onClose={() => setShowChat(false)} title="Messages">
+  <div className="h-[600px] w-full">
+    <Chat />
+  </div>
+</Dialog>
+
+
       <CreateEventModal 
         isOpen={showCreateEventModal}
         onClose={() => setShowCreateEventModal(false)}
