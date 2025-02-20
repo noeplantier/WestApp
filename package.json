@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@clerk/clerk-react": "^5.22.13",
     "@clerk/nextjs": "^6.11.3",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -28,6 +27,7 @@
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "class-variance-authority": "^0.7.1",
+    "clerk": "^0.8.3",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
     "framer-motion": "^11.16.1",
@@ -48,6 +48,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@clerk/clerk-react": "^5.23.0",
     "@eslint/js": "^9.9.1",
     "@types/jquery": "^3.5.32",
     "@types/leaflet": "^1.9.16",
