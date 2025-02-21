@@ -5,7 +5,7 @@ import Login from '../components/login/LoginModal';
 import Profile from './Profile';
 import MainTitle from './title/MainTitle';
 import HomePage from './home/HomePage';
-import SignupModal from '../components/signup/SignupModal';
+import SignupModal from './signin/SigninModal';
 import SettingsModal from './settings/SettingsModal';
 import CategoriesModal from './categories/CategoriesModal';
 import HelpModal from './help/HelpModal';
@@ -15,9 +15,7 @@ import HelpModal from './help/HelpModal';
 interface SignupModalProps {
 
   // existing properties
-
   onSignup: (userData: any) => void;
-
 }
 
 

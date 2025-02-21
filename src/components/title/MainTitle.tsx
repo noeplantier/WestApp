@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import '../../index.css';
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import { SignUpButton } from '@clerk/clerk-react';
+
 
 const MainTitle = () => {
 
@@ -55,13 +57,24 @@ const MainTitle = () => {
             <UserButton />
           </SignedIn>
    
-</Button>
-    </div>
+          </Button>
+
+
+<Button variant="secondary" className="custom-button" onClick={handleOpenLoginModal}>
+
+<SignedOut>
+            <SignUpButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+   
+          </Button>
           </div>
         </div>
-      </div>
-
-     
+      </div>  
+      
+    </div>
     </div>
   );
 };

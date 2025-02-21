@@ -1,12 +1,12 @@
 import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-interface SignupModalProps {
+interface SigninProps {
   show: boolean;
   onHide: () => void;
 }
 
-const SignupModal: React.FC<SignupModalProps> = ({ show, onHide }) => {
+const Signin: React.FC<SigninProps> = ({ show, onHide }) => {
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
@@ -48,4 +48,4 @@ const SignupModal: React.FC<SignupModalProps> = ({ show, onHide }) => {
   );
 };
 
-export default SignupModal;
+export default Signin;

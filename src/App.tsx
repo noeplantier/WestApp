@@ -15,7 +15,7 @@ import Clerk from '@clerk/clerk-react';
 
 const App = () => {
 
-  const [setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
 useEffect(() => {
   // Simulez un temps de chargement avant que l'application soit prête
@@ -23,9 +23,9 @@ useEffect(() => {
   return () => clearTimeout(timer);
 }, []);
 
-// if (isLoading) {
-//   return <Loader />; // Affiche le loader pendant le chargement
-// }
+if (isLoading) {
+  return <Loader />; // Affiche le loader pendant le chargement
+}
 
 
 return (
