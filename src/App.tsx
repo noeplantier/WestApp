@@ -23,9 +23,9 @@ useEffect(() => {
   return () => clearTimeout(timer);
 }, []);
 
-if (isLoading) {
-  return <Loader />; // Affiche le loader pendant le chargement
-}
+// if (isLoading) {
+//   return <Loader />; // Affiche le loader pendant le chargement
+// }
 
 
 return (
