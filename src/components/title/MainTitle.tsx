@@ -128,8 +128,8 @@ const MainTitle = () => {
 
       {/* Modale utilisateur */}
       <Modal open={showUserModal} onClose={() => setShowUserModal(false)}>
-        <div className="text-5xl font-bold text-center mb-10 mt-10">
-          Bienvenue sur WestApp, {user?.firstName} !
+        <div className="text-4xl font-bold text-center mb-10 mt-10">
+          Bienvenue sur WestApp, {user?.firstName} ! 🎉
         </div>
         
         <div className="space-y-6">
