@@ -4,14 +4,21 @@ import { Button } from 'react-bootstrap';
 import '../../index.css';
 import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/clerk-react";
 import { SignUpButton } from '@clerk/clerk-react';
-import { MapPin, Calendar } from "lucide-react";
+import { MapPin, Calendar, X } from "lucide-react";
+import { useActivities } from '../../hooks/useActivities'; // Ajustez le chemin d'import selon votre structure
 
 const Modal = ({ open, onClose, children }) => {
   if (!open) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg max-w-[800px] w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-lg max-w-[800px] w-full max-h-[90vh] overflow-y-auto relative">
+        <button 
+          onClick={onClose}
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+        >
+          <X className="w-6 h-6" />
+        </button>
         <div className="p-6">
           {children}
         </div>
@@ -31,11 +38,18 @@ const MainTitle = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
-  const [nearbyEvents, setNearbyEvents] = useState([
-    { id: 1, name: "Concert au Parc", distance: "0.5km", date: "Ce soir" },
-    { id: 2, name: "Festival de Street Food", distance: "1.2km", date: "Demain" },
-    { id: 3, name: "Exhibition d'Art", distance: "2.0km", date: "Ce weekend" },
-  ]);
+  const { activities } = useActivities();
+  
+  const nearbyEvents = activities.map(activity => ({
+    id: activity.id,
+    name: activity.title,
+    distance: `${((Math.random() * 5) + 0.5).toFixed(1)}km`, // Distance simulée
+    date: activity.date,
+    imageUrl: activity.imageUrl,
+    description: activity.description,
+    time: activity.time,
+    location: activity.location.city,
+  }));
 
   const { user } = useUser();
 
@@ -114,15 +128,15 @@ const MainTitle = () => {
 
       {/* Modale utilisateur */}
       <Modal open={showUserModal} onClose={() => setShowUserModal(false)}>
-        <div className="text-4xl font-bold text-center mb-6">
-          Bienvenue, {user?.firstName} !
+        <div className="text-5xl font-bold text-center mb-10 mt-10">
+          Bienvenue sur WestApp, {user?.firstName} !
         </div>
         
         <div className="space-y-6">
           {/* Informations utilisateur */}
-          <Card className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+          <Card className="bg-blue-600 text-white">
             <div className="p-6">
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-4 mb-4 mt-4">
                 <img
                   src={user?.imageUrl}
                   alt="Profile"
@@ -145,15 +159,28 @@ const MainTitle = () => {
               </h3>
               <div className="space-y-4">
                 {nearbyEvents.map(event => (
-                  <div key={event.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <Calendar className="w-5 h-5 text-blue-500" />
-                      <div>
-                        <h4 className="font-semibold">{event.name}</h4>
-                        <p className="text-sm text-gray-600">{event.distance}</p>
+                  <div key={event.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div className="flex items-center gap-4 flex-1">
+                      <img
+                        src={event.imageUrl}
+                        alt={event.name}
+                        className="w-16 h-16 rounded-lg object-cover"
+                      />
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3">
+                          <Calendar className="w-5 h-5 text-blue-500" />
+                          <h4 className="font-semibold text-lg">{event.name}</h4>
+                        </div>
+                        <p className="text-sm text-gray-600 mt-1">{event.description}</p>
+                        <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
+                          <span>{event.distance}</span>
+                          <span>•</span>
+                          <span>{event.location}</span>
+                          <span>•</span>
+                          <span>{event.date} à {event.time}</span>
+                        </div>
                       </div>
                     </div>
-                    <span className="text-sm font-medium text-purple-600">{event.date}</span>
                   </div>
                 ))}
               </div>
