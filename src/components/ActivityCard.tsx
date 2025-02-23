@@ -4,7 +4,6 @@ import { Dialog } from './shared/Dialog';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import LocationMap from './map/LocationMap';
 
 
 
@@ -63,7 +62,6 @@ export function ActivityCard({ activity }: ActivityCardProps) {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTimeSlots, setSelectedTimeSlots] = useState<string[]>([]);
   const [showDetails, setShowDetails] = useState(false);
-  const [showMap, setShowMap] = useState(false);
 
 
   const timeSlots = [
@@ -314,33 +312,8 @@ Cordialement.`;
           alt={activity.title}
           className="w-30 h-45 rounded-lg"
         />
-        <div className="absolute top-0 right-2 w-10 h-10">
-          <div className="relative w-full h-full">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative">
-                <div
-                  className="w-6 h-6 bg-blue-600 rounded-full animate-ping cursor-pointer"
-                  onClick={() => setShowMap(true)}
-                ></div>
-                <div className="absolute inset-0 w-6 h-6 bg-blue-600 rounded-full"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+   
 
-        {showMap && (
-          <div className="absolute inset-0 bg-white z-110 flex items-center justify-center">
-            <div className="w-full h-full relative">
-              <LocationMap />
-              <button
-                className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-2"
-                onClick={() => setShowMap(false)}
-              >
-                Fermer
-              </button>
-            </div>
-          </div>
-        )}
 
 
           <div className="bg-gray-50 p-4 rounded-lg mb-2">

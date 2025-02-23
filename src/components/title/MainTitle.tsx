@@ -127,9 +127,11 @@ const MainTitle = () => {
       </div>
 
       {/* Modale utilisateur */}
+
+      <div className="flex flex-col space-y-6 bg-blue-600">
       <Modal open={showUserModal} onClose={() => setShowUserModal(false)}>
-        <div className="text-4xl font-bold text-center mb-10 mt-10">
-          Bienvenue sur WestApp, {user?.firstName} ! 🎉
+        <div className="text-blue-600 text-5xl font-bold text-center mb-10 mt-10"  style={{textShadow: "1px 1px 2px gray"}}>
+          Bienvenue sur WestApp, {user?.firstName} ! 
         </div>
         
         <div className="space-y-6">
@@ -188,6 +190,7 @@ const MainTitle = () => {
           </Card>
         </div>
       </Modal>
+    </div>
     </div>
   );
 };
