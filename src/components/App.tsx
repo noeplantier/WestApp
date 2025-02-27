@@ -9,6 +9,7 @@ import SignupModal from './signin/SigninModal';
 import SettingsModal from './settings/SettingsModal';
 import CategoriesModal from './categories/CategoriesModal';
 import HelpModal from './help/HelpModal';
+import { CategoryFilter } from './CategoryFilter';
 
 
 
@@ -33,7 +34,8 @@ function App () {
   return (
     <Router>
       <Routes>
-
+      <Route path="/" element={<MainTitle />} />
+      <Route path="/activities" element={<CategoryFilter />} />
 <Route path="/settings" element={<SettingsModal open={false} onClose={function (): void {
           throw new Error('Function not implemented.');
         } } />} />

@@ -7,7 +7,6 @@ import { PremiumModal} from './components/premium/PremiumModal';
 import './index.css';
 import MainTitle from './components/title/MainTitle';
 import { useEffect, useState } from 'react';
-import Loader from './components/loader/Loader';
 import { SAMPLE_ACTIVITIES } from './hooks/useActivities';
 import Footer from './components/Footer';
 import Clerk from '@clerk/clerk-react';

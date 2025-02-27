@@ -30,7 +30,7 @@
     "clerk": "^0.8.3",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
-    "framer-motion": "^11.16.1",
+    "framer-motion": "^11.18.2",
     "jquery": "^3.7.1",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.344.0",
