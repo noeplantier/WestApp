@@ -80,51 +80,98 @@ const MainTitle = () => {
 
   return (
     <div className="relative min-h-screen">
-      {/* Vidéo de fond */}
-      <video
-        autoPlay
-        loop
-        muted
-        className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
-      >
-        <source
-          src="/videos/204565-924698132_small.mp4"
-          type="video/mp4"
-        />
-        Your browser does not support the video tag.
-      </video>
+    {/* Video overlay */}
+    <div className="absolute inset-0 bg-black/40 z-[-1]"></div>
+    
+    {/* Vidéo de fond */}
+    <video
+      autoPlay
+      loop
+      muted
+      className="absolute top-0 left-0 w-full h-full object-cover z-[-2]"
+    >
+      <source
+        src="/videos/204565-924698132_small.mp4"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
 
-      {/* Contenu principal */}
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center my-2 p-6" id="main-container" style={{textShadow: "1px 1px 2px gray"}}>
-          <h1 className="text-white text-9xl font-bold" id="main-title">
-            WestApp
-          </h1>
-          <h2 className="text-white font-semibold text-5xl mt-4">
-            Vivez l'instant présent.
-          </h2>
-          <div className="mt-8">
-            <div className="button-container">
-              <Button variant="secondary" className="custom-button" onClick={handleOpenLoginModal}>
-                <SignedOut>
-                  <SignInButton />
-                </SignedOut>
-                <SignedIn>
-                  <UserButton afterSignOutUrl="/" />
-                </SignedIn>
-              </Button>
-              <Button variant="secondary" className="custom-button" onClick={handleOpenSignupModal}>
-                <SignedOut>
-                  <SignUpButton />
-                </SignedOut>
-                <SignedIn>
-                  <UserButton afterSignOutUrl="/" />
-                </SignedIn>
-              </Button>
-            </div>
-          </div>
-        </div>
+   {/* Contenu principal */}
+<div className="flex justify-center items-center min-h-screen">
+  <div className="text-center my-2 p-6 max-w-9xl" id="main-container" style={{textShadow: "1px 1px 2px gray"}}>
+    <h1 className="text-white text-9xl font-bold" id="main-title">
+      WestApp
+    </h1>
+    
+    <h2 className="text-white font-semibold text-4xl mt-4 mb-6">
+      Sortez. Rencontrez. Vivez.
+    </h2>
+    
+    <p className="text-white text-xl mb-8">
+      Le réseau social qui transforme vos connexions virtuelles en rencontres réelles.
+      Découvrez des événements, trouvez des compagnons d'aventure et créez de véritables liens dans votre ville.
+    </p>
+    
+    <div className="flex flex-wrap justify-center gap-8 mb-10">
+      <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl max-w-xs">
+        <div className="text-pink-400 text-4xl mb-2">🗓️</div>
+        <h3 className="text-white text-xl font-bold mb-2">Événements locaux</h3>
+        <p className="text-gray-200">Découvrez des sorties, activités et événements près de chez vous</p>
       </div>
+      
+      <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl max-w-xs">
+        <div className="text-pink-400 text-4xl mb-2">👋</div>
+        <h3 className="text-white text-xl font-bold mb-2">Rencontres réelles</h3>
+        <p className="text-gray-200">Connectez-vous avec des personnes qui partagent vos intérêts</p>
+      </div>
+      
+      <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl max-w-xs">
+        <div className="text-pink-400 text-4xl mb-2">🌟</div>
+        <h3 className="text-white text-xl font-bold mb-2">Expériences sociales</h3>
+        <p className="text-gray-200">Créez des souvenirs en participant à des expériences enrichissantes</p>
+      </div>
+    </div>
+    
+    <p className="text-white text-xl mb-8">
+      Prêt à quitter votre canapé et à vivre de vraies aventures ?
+    </p>
+
+
+{ /* Boutons de connexion */}
+    <div className="mt-6">
+      <div className="button-container flex flex-col sm:flex-row gap-4 justify-center">
+        <Button 
+          variant="secondary" 
+          className="custom-button text-base px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white" 
+          onClick={handleOpenLoginModal}
+        >
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+        </Button>
+        <Button 
+          className="custom-button text-base px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white" 
+          onClick={handleOpenSignupModal}
+        >
+          <SignedOut>
+            <SignUpButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+        </Button>
+      </div>
+    </div>
+    
+    <p className="text-gray-300 mt-6 text-sm">
+      Rejoignez plus de 50 000 personnes qui ont déjà fait le premier pas vers une vie sociale plus riche
+    </p>
+  </div>
+</div>
 
       {/* Modale utilisateur */}
 
