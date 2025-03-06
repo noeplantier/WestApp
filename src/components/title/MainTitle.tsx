@@ -92,26 +92,26 @@ const MainTitle = () => {
 
       {/* Contenu principal */}
       <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center w-full px-4 md:px-6 lg:px-8" id="main-container" style={{textShadow: "1px 1px 2px gray"}}>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-6 mt-10">
-            <h1 className="text-white text-4xl sm:text-6xl lg:text-8xl font-bold">Une vie de</h1>
-            <div className="h-16 sm:h-20 lg:h-24">
-              <RotatingText
-                texts={['rencontres', 'découverte', 'connexions']}
-                mainClassName="px-4 sm:px-6 py-2 text-4xl sm:text-6xl lg:text-8xl font-bold bg-blue-600 text-black rounded-full"
-                staggerFrom={"last"}
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                exit={{ y: "-120%" }}
-                staggerDuration={0.02}
-                splitLevelClassName="overflow-hidden"
-                transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                rotationInterval={2500}
-              />
-            </div>
-          </div>
+        <div className="text-center w-full px-4 mb:20 md:px-6 lg:px-8" id="main-container" style={{textShadow: "1px 1px 2px gray"}}>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-10 mt-2">
+  <h1 className="text-white text-4xl sm:text-6xl lg:text-8xl font-bold">Une vie de</h1>
+  <div className="h-16 sm:h-22 lg:h-24 -mt-0">
+    <RotatingText
+      texts={['rencontres', 'découverte', 'connexions']}
+      mainClassName="px-4 sm:px-0 py-1 text-4xl sm:text-6xl lg:text-8xl font-bold bg-blue-600 text-white rounded-full -translate-y-10"
+      staggerFrom={"last"}
+      initial={{ y: "100%" }}
+      animate={{ y: 0 }}
+      exit={{ y: "-100%" }}
+      staggerDuration={0.01}
+      splitLevelClassName="overflow-hidden"
+      transition={{ type: "spring", damping: 30, stiffness: 400 }}
+      rotationInterval={2000}
+    />
+  </div>
+</div>
           
-          <h2 className="text-white text-center md:text-left text-2xl sm:text-4xl lg:text-5xl font-semibold font-italic m-4 md:m-8 mt-8 mb-0">
+          <h2 className="text-white text-center md:text-left text-2xl sm:text-4xl lg:text-5xl font-semibold font-italic m-4 md:m-8 mt-10 mb-0">
             Le réseau social qui transforme vos <br className="hidden md:block" /> connexions virtuelles en rencontres réelles.
           </h2>
     
@@ -138,10 +138,10 @@ const MainTitle = () => {
             
             <button 
               onClick={scrollToContent}
-              className="mt-6 md:mt-8 mb-8 md:mb-16 px-6 md:px-8 py-2 md:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-lg md:text-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center mx-auto"
+              className="mt-6 md:mt-8 mb-8 mb-16 px-6 md:px-8 py-2 md:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-lg md:text-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center mx-auto"
             >
               Vivez une nouvelle aventure
-              <ChevronDown className="ml-2 animate-bounce w-4 h-4 md:w-6 md:h-6" />
+              <ChevronDown className="ml-2 mt-1 animate-bounce w-4 h-4 md:w-6 md:h-6" />
             </button>
 
             {/* Modale Bienvenue */}
