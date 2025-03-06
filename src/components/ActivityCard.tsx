@@ -6,6 +6,25 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 
+const tiltCardStyles = `
+  .tilt-card {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    transition: transform 0.3s ease;
+  }
+
+  .tilt-card:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+  }
+
+  .tilt-content {
+    transform: translateZ(20px);
+  }
+`;
+
+const StyleTag = () => (
+  <style>{tiltCardStyles}</style>
+);
 
 interface Participant {
   id: string;
@@ -259,50 +278,55 @@ Cordialement.`;
 
   return (
     <>
-      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ">
-        <img
-        
-          src={activity.imageUrl}
-          alt={activity.title}
-          className="w-full h-65  cursor-pointer"
-          onClick={() => setShowDetails(true)}
-        />
-        <div className="p-4">
-          <h3 className="text-lg font-semibold text-gray-900">{activity.title}</h3>
+      <StyleTag />
+      {/* Section événements à proximité */}
+      <div className="tilt-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 w-full max-w-sm">
+        <div className="aspect-w-16 aspect-h-9">
+          <img
+            src={activity.imageUrl}
+            alt={activity.title}
+            className="w-full h-48 object-cover cursor-pointer"
+            onClick={() => setShowDetails(true)}
+          />
+        </div>
+        <div className="p-4 tilt-content">
+          <div className="h-16"> {/* Fixed height for title container */}
+            <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">{activity.title}</h3>
+          </div>
           <div className="mt-2 space-y-2">
             <div className="flex items-center text-gray-600">
-              <Calendar className="h-4 w-4 mr-2" />
-              <span className="text-sm">{activity.date}</span>
+              <Calendar className="h-4 w-4 mr-2 flex-shrink-0" />
+              <span className="text-sm truncate">{activity.date}</span>
             </div>
             <div className="flex items-center text-gray-600">
-              <Clock className="h-4 w-4 mr-2" />
-              <span className="text-sm">{activity.time}</span>
+              <Clock className="h-4 w-4 mr-2 flex-shrink-0" />
+              <span className="text-sm truncate">{activity.time}</span>
             </div>
             <div className="flex items-center text-gray-600">
-              <MapPin className="h-4 w-4 mr-2" />
-              <span className="text-sm">{activity.location.city}</span>
+              <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+              <span className="text-sm truncate">{activity.location.city}</span>
             </div>
             <div className="flex items-center text-gray-600">
-              <Users className="h-4 w-4 mr-2" />
-              <span className="text-sm">
+              <Users className="h-4 w-4 mr-2 flex-shrink-0" />
+              <span className="text-sm truncate">
                 {activity.participants.length}/{activity.maxParticipants} participants
               </span>
             </div>
           </div>
           <div className="mt-4 flex gap-2">
-  <button
-    onClick={() => setShowDetails(true)}
-    className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
-  >
-    Détails
-  </button>
-  <button
-    onClick={() => setShowParticipateModal(true)}
-    className="flex-1 bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition-colors"
-  >
-    Participer
-  </button>
-</div>
+            <button
+              onClick={() => setShowDetails(true)}
+              className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+            >
+              Détails
+            </button>
+            <button
+              onClick={() => setShowParticipateModal(true)}
+              className="flex-1 bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition-colors"
+            >
+              Participer
+            </button>
+          </div>
         </div>
       </div>
       <Dialog isOpen={showDetails} onClose={() => setShowDetails(false)} title={activity.title}>
