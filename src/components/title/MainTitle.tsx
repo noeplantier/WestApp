@@ -1,13 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
 import '../../index.css';
-import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/clerk-react";
-import { SignUpButton } from '@clerk/clerk-react';
 import { MapPin, Calendar, X, ChevronDown } from "lucide-react";
 import { useActivities } from '../../hooks/useActivities'; 
 import RotatingText from '../RotatingText/RotatingText'
-
+import { useUser } from '@clerk/clerk-react';
 
 const Modal = ({ open, onClose, children }) => {
   if (!open) return null;
@@ -36,18 +33,15 @@ const Card = ({ children, className = "" }) => (
 );
 
 const MainTitle = () => {
-
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showSignupModal, setShowSignupModal] = useState(false);
-  const [showUserModal, setShowUserModal] = useState(false);
-  const [userLocation, setUserLocation] = useState(null);
+  const [setUserLocation] = useState(null);
   const { activities } = useActivities();
   const contentRef = useRef(null);
+  const [showUserModal, setShowUserModal] = useState(false);
   
   const nearbyEvents = activities.map(activity => ({
     id: activity.id,
     name: activity.title,
-    distance: `${((Math.random() * 5) + 0.5).toFixed(1)}km`, // Distance simulée
+    distance: `${((Math.random() * 5) + 0.5).toFixed(1)}km`,
     date: activity.date,
     imageUrl: activity.imageUrl,
     description: activity.description,
@@ -55,35 +49,27 @@ const MainTitle = () => {
     location: activity.location.city,
   }));
 
-  const { user } = useUser();
+  const user = useUser();
+
 
   useEffect(() => {
-    if (user) {
-      setShowUserModal(true);
-      
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            setUserLocation({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            });
-          },
-          (error) => {
-            console.error("Erreur de géolocalisation:", error);
-          }
-        );
-      }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          });
+        },
+        (error) => {
+          console.error("Erreur de géolocalisation:", error);
+        }
+      );
     }
-  }, [user]);
-
-  const handleOpenLoginModal = () => setShowLoginModal(true);
-  const handleCloseLoginModal = () => setShowLoginModal(false);
-  const handleOpenSignupModal = () => setShowSignupModal(true);
-  const handleCloseSignupModal = () => setShowSignupModal(false);
+  }, []);
 
   const scrollToContent = () => {
-    navigate('/activities');  // Assuming '/activities' is the route for CategoryFilter
+    navigate('/activities');
   };
 
   return (
@@ -161,39 +147,9 @@ const MainTitle = () => {
       <ChevronDown className="ml-2 animate-bounce" />
     </button>
      
-            {/* Boutons de connexion */}
-            <div className="mt-6">
-              <div className="button-container flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  variant="secondary" 
-                  className="custom-button text-base px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white" 
-                  onClick={handleOpenLoginModal}
-                >
-                  <SignedOut>
-                    <SignInButton />
-                  </SignedOut>
-                  <SignedIn>
-                    <UserButton afterSignOutUrl="/" />
-                  </SignedIn>
-                </Button>
-                <Button 
-                  className="custom-button text-base px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white" 
-                  onClick={handleOpenSignupModal}
-                >
-                  <SignedOut>
-                    <SignUpButton />
-                  </SignedOut>
-                  <SignedIn>
-                    <UserButton afterSignOutUrl="/" />
-                  </SignedIn>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> 
+           
 
-      {/* Modale utilisateur */}
+      {/* Modale Bienvenue */}
       <div className="flex flex-col space-y-6 bg-blue-600">
         <Modal open={showUserModal} onClose={() => setShowUserModal(false)}>
           <div className="text-blue-600 text-5xl font-bold text-center mb-10 mt-10"  style={{textShadow: "1px 1px 2px gray"}}>
@@ -258,6 +214,9 @@ const MainTitle = () => {
         </Modal>
       </div>
     </div>
+  </div>
+  </div>
+  </div>
   );
 };
 
