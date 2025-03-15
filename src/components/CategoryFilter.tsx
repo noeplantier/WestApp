@@ -194,7 +194,7 @@ export function CategoryFilter() {
 
 
       <h3 className="text-white font-semibold text-4xl mt-10" style={{textShadow: "1px 1px 2px gray"}}>
-      Recherche les meilleures activités près de <span className="px-6 py-2 font-bold bg-blue-600 text-black rounded-full">{isLoadingLocation ? '...' : location}</span>
+      Recherche les meilleures activités près de <span className="px-6 py-2 font-bold bg-blue-600 text-white rounded-full">{isLoadingLocation ? '...' : location}</span>
     </h3>
 
 
